@@ -69,7 +69,7 @@ Agenda:
 
 
 Bibliography: 
-1.	Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
-2.	Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
-3.	Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
-4.	Professional Linux Kernel Architecture, Wolfgang Mauerer
+* Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
+* Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
+* Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
+* Professional Linux Kernel Architecture, Wolfgang Mauerer
