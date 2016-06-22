@@ -10,25 +10,25 @@ It is adjustable  in time and order; however the expectations and basic topics s
 Agenda: 
 
 * OS Architecture
-  * Introduction 
+ * Introduction
    * What is an Operating Systems
    * Operating System Structure
    * Operating System Operations
-  * Process Management
-    * Processes
-    * Threads
-    * CPU Scheduling
-    * Process Synchronization
-    * Deadlocks
-  * Memory 
-    * Main Memory
-    * Virtual Memory
-  * Storage Management
-    * File System Interface
-    * File System Implementation
-    * Mass Storage Structure
-    * I/O Systems 
-
+ * Process Management
+   * Processes
+   * Threads
+   * CPU Scheduling
+   * Process Synchronization
+   * Deadlocks
+ * Memory 
+   * Main Memory
+   * Virtual Memory
+ * Storage Management
+   * File System Interface
+   * File System Implementation
+   * Mass Storage Structure
+   * I/O Systems 
+  
 * Linux (Kernel Space)
   * Elements on the Kernel 
     * Processes, Task Switching and Scheduling
@@ -61,15 +61,15 @@ Agenda:
     * ACPI and APM
   * Debugging techniques
     *	Kernel Debuggers
-* Linux boot process
-  * The Linux x86 boot protocol
-  * How is the kernel built?
-  * Loading the kernel – bzImage boot protocol
-  * The start_kernel() function
+  * Linux boot process
+   * The Linux x86 boot protocol
+   * How is the kernel built?
+   * Loading the kernel – bzImage boot protocol
+   * The start_kernel() function
 
 
 Bibliography: 
-1.	Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
-2.	Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
-3.	Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
-4.	Professional Linux Kernel Architecture, Wolfgang Mauerer
+* Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
+* Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
+* Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
+* Professional Linux Kernel Architecture, Wolfgang Mauerer
