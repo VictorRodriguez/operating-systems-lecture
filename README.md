@@ -11,23 +11,23 @@ Agenda:
 
 * OS Architecture
   * Introduction 
-    * What is an Operating Systems
-    •	Operating System Structure
-    •	Operating System Operations
+   * What is an Operating Systems
+   * Operating System Structure
+   * Operating System Operations
   * Process Management
-    •	Processes
-    •	Threads
-    •	CPU Scheduling
-    •	Process Synchronization
-    •	Deadlocks
+    * Processes
+    * Threads
+    * CPU Scheduling
+    * Process Synchronization
+    * Deadlocks
   * Memory 
-    •	Main Memory
-    •	Virtual Memory
+    * Main Memory
+    * Virtual Memory
   * Storage Management
-    •	File System Interface
-    •	File System Implementation
-    •	Mass Storage Structure
-    •	I/O Systems 
+    * File System Interface
+    * File System Implementation
+    * Mass Storage Structure
+    * I/O Systems 
 
 * Linux (Kernel Space)
   * Elements on the Kernel 
