@@ -1,0 +1,8 @@
+Steps: 
+
+* Install a Linux base OS 
+* Clone the repository
+* Change your name in the code
+* git add hello.c
+* git commit -s -m 'ITESMID-homework-01'
+* git send-mail -1
