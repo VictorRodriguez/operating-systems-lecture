@@ -12,8 +12,8 @@ Agenda:
 * OS Architecture
   * Introduction 
     * What is an Operating Systems
+      * https://drive.google.com/open?id=0B7iKrGdVkDhIOElQYnhRU09TWXc
     * Operating System Structure
-    * Operating System Operations
   * Process Management
      * Processes
      * Threads
