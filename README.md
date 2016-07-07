@@ -14,8 +14,10 @@ Agenda:
     * What is an Operating Systems
       * https://drive.google.com/open?id=0B7iKrGdVkDhIOElQYnhRU09TWXc
     * Operating System Structure
+     * https://drive.google.com/file/d/0B7iKrGdVkDhIZVB4RkY4MHdYd2M/view?usp=sharing 
   * Process Management
      * Processes
+      * https://drive.google.com/file/d/0B7iKrGdVkDhIam9QbHFsZVh0WHM/view?usp=sharing  
      * Threads
      * CPU Scheduling
      * Process Synchronization
