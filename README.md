@@ -70,6 +70,21 @@ Agenda:
     * The start_kernel() function
 
 
+
+Pondaration: 
+
+ * 35% First Term
+   * 15% Weekly Quizzes
+   * 5% Reading Summaries
+   * 15% Labs
+
+ * 35% Second Term
+   * 15%  Weekly Quizzes
+   * 5% Reading Summaries
+   * 15% Labs
+
+* 30% Final Exam
+
 Bibliography: 
 * Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
 * Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
