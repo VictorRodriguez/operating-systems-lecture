@@ -17,7 +17,7 @@ Agenda:
       * https://drive.google.com/file/d/0B7iKrGdVkDhIZVB4RkY4MHdYd2M/view?usp=sharing 
   * Process Management
      * Processes
-       * https://drive.google.com/file/d/0B7iKrGdVkDhIam9QbHFsZVh0WHM/view?usp=sharing  
+       * https://drive.google.com/file/d/0B7iKrGdVkDhIR2VORXdGLVZGVVU/view?usp=sharing  
      * Threads
      * CPU Scheduling
      * Process Synchronization
