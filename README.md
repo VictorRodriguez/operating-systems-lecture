@@ -17,7 +17,7 @@ Agenda:
       * https://drive.google.com/file/d/0B7iKrGdVkDhIZVB4RkY4MHdYd2M/view?usp=sharing 
   * Process Management
      * Processes
-       * https://drive.google.com/file/d/0B7iKrGdVkDhIam9QbHFsZVh0WHM/view?usp=sharing  
+       * https://drive.google.com/file/d/0B7iKrGdVkDhIR2VORXdGLVZGVVU/view?usp=sharing  
      * Threads
      * CPU Scheduling
      * Process Synchronization
@@ -86,7 +86,9 @@ Pondaration:
 * 30% Final Exam
 
 Bibliography: 
+Mian Book : Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
+
+Other good books : 
 * Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
 * Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
-* Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
 * Professional Linux Kernel Architecture, Wolfgang Mauerer
