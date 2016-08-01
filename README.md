@@ -19,7 +19,9 @@ Agenda:
      * Processes
        * https://drive.google.com/file/d/0B7iKrGdVkDhIR2VORXdGLVZGVVU/view?usp=sharing  
      * Threads
+       * https://drive.google.com/file/d/0B7iKrGdVkDhIN1A2Y1AwbkpIeHM/view?usp=sharing 
      * CPU Scheduling
+       * https://drive.google.com/file/d/0B7iKrGdVkDhIcU8wYUJULWNEalE/view?usp=sharing
      * Process Synchronization
      * Deadlocks
   * Memory 
