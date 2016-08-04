@@ -74,6 +74,15 @@ Agenda:
     * The start_kernel() function
 
 
+Oftopic Trainings ( in case you need them ) 
+  * Bash Trainings: 
+    * https://drive.google.com/file/d/0B7iKrGdVkDhILU9QRWllWmNKM2M/view?usp=sharing
+    * https://drive.google.com/file/d/0B7iKrGdVkDhIWGVhVzhtTlZjWGc/view?usp=sharing
+    * https://drive.google.com/file/d/0B7iKrGdVkDhIRkVPSlNPdkdSS2c/view?usp=sharing
+    * https://drive.google.com/file/d/0B7iKrGdVkDhIbkdKYWI1R19oMzQ/view?usp=sharing
+ 
+
+
 
 Pondaration: 
 
