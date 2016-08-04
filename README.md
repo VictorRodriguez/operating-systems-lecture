@@ -41,26 +41,28 @@ Agenda:
        * Page Tables
        * Allocation of Physical Memory
        * Slab Cache
-  * Timing
-    * Jiffies
-    * Inserting delays
-    * Dynamic Timers
-    * Timer Implementation
-    * High Resolution Timers
-  * Drivers
-    * Network Drivers 
-    * Block Drivers
-    * Character Drivers
-  * IOCTLs
-    * Driver entry points for IOCTLs
-    * Locked and Lockless IOCTLs
-    * Defining IOCTLs
-  * Unified Device Model and sysfs
+  * Linux Device Drivers
+    * https://drive.google.com/file/d/0B7iKrGdVkDhIdjhiZ3RuYnVQbk0/view?usp=sharing
+    * Kind of Drivers
+      * Network Drivers 
+      * Block Drivers
+      * Character Drivers
+    * IOCTLs
+      * Driver entry points for IOCTLs
+      * Locked and Lockless IOCTLs
+      * Defining IOCTLs
+    * Unified Device Model and sysfs
+    * Transfer between user and kernel space
+    * Timing
+      * Jiffies
+      * Inserting delays
+      * Dynamic Timers
+      * Timer Implementation
+      * High Resolution Timers
   * Memory management and allocation
     * Kmalloc
     * Vmalloc
     * Bootmem
-  * Transfer between user and kernel space
   * Power Management
     * ACPI and APM
   * Debugging techniques
