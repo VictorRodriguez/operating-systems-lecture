@@ -105,3 +105,7 @@ Other good books :
 * Understanding the Linux Kernel, 3rd Edition. Daniel P. Bovet and Marco Cesati. Copyright © 2005 O'Reilly Media, Inc.
 * Advanced Linux Programming. Mark Mitchell, Jeffrey Oldham and Alex Samuel. New Riders Publishing, 2001
 * Professional Linux Kernel Architecture, Wolfgang Mauerer
+
+Q/A Contact point: 
+
+* https://groups.google.com/forum/#!forum/oslecture-itesm-gdl
