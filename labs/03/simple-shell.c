@@ -64,7 +64,7 @@ int main(void) {
 
 String* split(String str, char separator) {
     int spaces = 0;
-    for (int i = 0; i < strlen(str), i++) {
+    for (int i = 0; i < strlen(str); i++) {
         if (str[i] == separator) spaces++;
     }
     int index = 0;
