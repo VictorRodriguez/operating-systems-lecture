@@ -21,7 +21,7 @@ Agenda:
      * Threads
        * https://drive.google.com/file/d/0B7iKrGdVkDhIN1A2Y1AwbkpIeHM/view?usp=sharing 
      * CPU Scheduling
-       * https://drive.google.com/file/d/0B7iKrGdVkDhIcU8wYUJULWNEalE/view?usp=sharing
+       * https://drive.google.com/file/d/0B7iKrGdVkDhIZkRWVHZ3M2pYOUU/view
      * Process Synchronization
      * Deadlocks
   * Memory 
