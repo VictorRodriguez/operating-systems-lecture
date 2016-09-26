@@ -1,3 +1,13 @@
+/*
+ *
+ * Taken from
+ * http://www.linuxdevcenter.com/pub/a/linux/2007/05/24/semaphores-in-linux.html?page=5
+ *
+ *
+ *
+ *
+ */
+
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
