@@ -4,6 +4,8 @@ all:
 	gcc -lpthread  peterson.c -o peterson
 	
 	g++ -DUSE_SPINLOCK -Wall -pthread spin_lock.c -o spin_lock
+	gcc client.c -o client -pthread
+	gcc server.c -o server -pthread
 
 clean:
 	rm -rf race_condition
