@@ -70,3 +70,34 @@ Instructions
             3235.91
 
         Average: 3252.11 MB/s
+
+
+    IMPORTANT
+
+    The values we are going to change are 
+
+    Kernel 
+
+        kernel.sched_latency_ns
+        kernel.sched_migration_cost_ns
+        kernel.sched_min_granularity_ns
+        kernel.sched_nr_migrate
+        kernel.sched_rr_timeslice_ms
+        kernel.sched_rt_period_us
+        kernel.sched_rt_runtime_us
+        kernel.sched_schedstats 
+        kernel.sched_shares_window_ns
+        kernel.sched_time_avg_ms
+        kernel.sched_tunable_scaling
+        kernel.sched_wakeup_granularity_ns
+    
+    Memory
+
+        vm.swappiness
+
+    More info here: 
+    
+    https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-cpu-scheduler.html
+    http://fizyka.umk.pl/~jkob/prace-mag/cfs-tuning.pdf 
+    https://doc.opensuse.org/documentation/html/openSUSE_121/opensuse-tuning/cha.tuning.taskscheduler.html
+    https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html
