@@ -23,6 +23,7 @@ Agenda:
      * CPU Scheduling
        * https://drive.google.com/file/d/0B7iKrGdVkDhIZkRWVHZ3M2pYOUU/view
      * Process Synchronization
+       * https://drive.google.com/open?id=0B7iKrGdVkDhIbDg1VHY4aUNkZzg
      * Deadlocks
   * Memory 
      * Main Memory
@@ -82,7 +83,9 @@ Oftopic Trainings ( in case you need them )
     * https://drive.google.com/file/d/0B7iKrGdVkDhIWGVhVzhtTlZjWGc/view?usp=sharing
     * https://drive.google.com/file/d/0B7iKrGdVkDhIRkVPSlNPdkdSS2c/view?usp=sharing
     * https://drive.google.com/file/d/0B7iKrGdVkDhIbkdKYWI1R19oMzQ/view?usp=sharing
- 
+    
+  * GCC for performance Trainings:
+    * https://drive.google.com/open?id=0B7iKrGdVkDhIUzZTVTduczJrQTg
 
 Pondaration: 
 
