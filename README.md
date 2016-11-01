@@ -27,6 +27,7 @@ Agenda:
      * Deadlocks
   * Memory 
      * Main Memory
+      * https://drive.google.com/file/d/0B7iKrGdVkDhIb0RDcGM0S1VBTTg/view?usp=sharing
      * Virtual Memory
   * Storage Management
      * File System Interface
