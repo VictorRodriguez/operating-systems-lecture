@@ -100,7 +100,7 @@ Pondaration:
    * 5% Reading Summaries
    * 15% Labs
 
-* 30% Final Exam
+* 30% Final Exam ( if student decides to do final project it is = 10% and final exam 20 % ) 
 
 Bibliography: 
 Mian Book : Operating System Concepts, Abraham Silberschatz, Peter B. Galvin
