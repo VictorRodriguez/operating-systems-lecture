@@ -9,6 +9,8 @@
 int main() {
 
 	pid_t pid;
+
+	printf("Main Process PID = %d\n", getpid()); 
 	/* fork a child process */ 
 	pid = fork();
 	if (pid < 0) {
@@ -19,7 +21,8 @@ int main() {
 	
 	else if (pid == 0) {
 		/* child process */
-		execlp("/bin/ls","ls",NULL); 
+	    printf(">> Parent PID = %d\n", getppid()); 
+		printf(">> Child PID = %d\n", getpid()); 
 	}
 
 	else {
