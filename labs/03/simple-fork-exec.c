@@ -61,6 +61,7 @@ IE:
 int main() {
 
 	pid_t pid;
+
 	/* fork a child process */ 
 	pid = fork();
 	if (pid < 0) {
@@ -72,6 +73,19 @@ int main() {
 	else if (pid == 0) {
 		/* child process */
 		execlp("/bin/ls","ls",NULL); 
+	}
+
+	/* fork a child process */ 
+	pid = fork();
+	if (pid < 0) {
+		/* error occurred */ 
+		fprintf(stderr, "Fork Failed"); 
+		exit (-1) ;
+	}
+	
+	else if (pid == 0) {
+		/* child process */
+		execlp("/bin/pwd","pwd",NULL); 
 	}
 
 	else {

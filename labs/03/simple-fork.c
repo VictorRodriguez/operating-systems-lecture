@@ -13,6 +13,9 @@ int main() {
 	printf("Main Process PID = %d\n", getpid()); 
 	/* fork a child process */ 
 	pid = fork();
+
+    printf("pid = %d\n",pid);
+
 	if (pid < 0) {
 		/* error occurred */ 
 		fprintf(stderr, "Fork Failed"); 
