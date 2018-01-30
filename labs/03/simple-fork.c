@@ -8,13 +8,21 @@
 
 int main() {
 
+    int var = 0; 
+
 	pid_t pid;
 
 	printf("Main Process PID = %d\n", getpid()); 
 	/* fork a child process */ 
 	pid = fork();
 
-    printf("pid = %d\n",pid);
+    if (pid ==0 ){
+        //im inside the child
+        printf(" >>pid = %d\n",pid);
+    }
+        else{
+        printf(" pid = %d\n",pid);
+        }
 
 	if (pid < 0) {
 		/* error occurred */ 
@@ -26,6 +34,8 @@ int main() {
 		/* child process */
 	    printf(">> Parent PID = %d\n", getppid()); 
 		printf(">> Child PID = %d\n", getpid()); 
+        var = var +10;
+        printf(">>var = %d\n",var);
 	}
 
 	else {
@@ -33,7 +43,8 @@ int main() {
 		/* parent will wait for the child to complete */ 
 		wait(NULL);
 		printf("Child Complete\n");
-		exit(0);
 	}
+
+    printf("var = %d\n",var);
 }
 
