@@ -1,0 +1,30 @@
+execve("./demo_use", ["./demo_use"], 0x7ffc82c57570 /* 47 vars */) = 0
+brk(NULL)                               = 0x2113000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/var/cache/ldconfig/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</var/cache/ldconfig/ld.so.cache>
+fstat(3</var/cache/ldconfig/ld.so.cache>, {st_mode=S_IFREG|0644, st_size=155244, ...}) = 0
+mmap(NULL, 155244, PROT_READ, MAP_PRIVATE, 3</var/cache/ldconfig/ld.so.cache>, 0) = 0x7f6dd7caa000
+close(3</var/cache/ldconfig/ld.so.cache>) = 0
+openat(AT_FDCWD, "/usr/lib64/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib64/haswell/libc-2.26.so>
+read(3</usr/lib64/haswell/libc-2.26.so>, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0`\21\2\0\0\0\0\0"..., 832) = 832
+fstat(3</usr/lib64/haswell/libc-2.26.so>, {st_mode=S_IFREG|0755, st_size=1988600, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f6dd7ca8000
+mmap(NULL, 2001536, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3</usr/lib64/haswell/libc-2.26.so>, 0) = 0x7f6dd7abf000
+mprotect(0x7f6dd7c9d000, 4096, PROT_NONE) = 0
+mmap(0x7f6dd7c9e000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3</usr/lib64/haswell/libc-2.26.so>, 0x1de000) = 0x7f6dd7c9e000
+mmap(0x7f6dd7ca4000, 14976, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f6dd7ca4000
+madvise(0x7f6dd7ca4000, 14976, MADV_MERGEABLE) = 0
+close(3</usr/lib64/haswell/libc-2.26.so>) = 0
+arch_prctl(ARCH_SET_FS, 0x7f6dd7ca94c0) = 0
+mprotect(0x7f6dd7c9e000, 16384, PROT_READ) = 0
+mprotect(0x600000, 4096, PROT_READ)     = 0
+mprotect(0x7f6dd7cf0000, 4096, PROT_READ) = 0
+munmap(0x7f6dd7caa000, 155244)          = 0
+fstat(1</home/vrodri3/operating-systems-lecture/labs/07/libhello/log>, {st_mode=S_IFREG|0644, st_size=1781, ...}) = 0
+brk(NULL)                               = 0x2113000
+brk(0x2134000)                          = 0x2134000
+write(1</home/vrodri3/operating-systems-lecture/labs/07/libhello/log>, "Hello, library world.`\nHello, th"..., 55Hello, library world.`
+Hello, this is a security fix.`
+) = 55
+exit_group(0)                           = ?
++++ exited with 0 +++
