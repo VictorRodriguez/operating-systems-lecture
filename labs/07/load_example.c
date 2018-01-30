@@ -7,13 +7,13 @@
         double (*cosine)(double);
         char *error;
 
-        handle = dlopen ("/lib/libm.so.6", RTLD_LAZY);
+        handle = dlopen ("/usr/lib64/libm.so.6", RTLD_LAZY);
         if (!handle) {
             fputs (dlerror(), stderr);
             exit(1);
         }
 
-        cosine = dlsym(handle, "cos");
+        cosine = dlsym(handle, "tan");
         if ((error = dlerror()) != NULL)  {
             fputs(error, stderr);
             exit(1);
