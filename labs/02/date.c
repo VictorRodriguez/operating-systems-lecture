@@ -43,7 +43,7 @@ int main(int argc , char *argv[]){
                  break;
              case 'm' :
                  seconds = get_time_seconds();
-                 minutes = seconds / (60 * 60);
+                 minutes = seconds / (60);
                  printf("Minutes in this year: %d\n",minutes);
                  break;
              case 's' :
