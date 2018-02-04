@@ -11,6 +11,14 @@ void get_date(){
             + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 
+void print_menu(){
+    printf("Date binary to have fun\n");
+    printf("-w : weeks of this year\n");
+    printf("-d : days of this year \n");
+    printf("-m : minutes of this year\n");
+    printf("-s : seconds of this year\n");
+
+}
 int get_time_seconds(){
     
 	time_t t = time(NULL);
@@ -29,7 +37,7 @@ int main(int argc , char *argv[]){
     int option = 0;
 
     if (argc != 1 ){
-    while ((option = getopt(argc, argv,"wdms")) != -1) {
+    while ((option = getopt(argc, argv,"wdmsh")) != -1) {
         switch (option) {
             case 'w' :
                  seconds = get_time_seconds();
@@ -50,7 +58,11 @@ int main(int argc , char *argv[]){
                  seconds = get_time_seconds();
                  printf("Seconds in this year: %d\n",seconds);
                  break;
-             default: printf("Error");
+             case 'h' :
+                 print_menu();
+                 break;
+             default: 
+                 print_menu();
                  exit(-1);
             }
         }
