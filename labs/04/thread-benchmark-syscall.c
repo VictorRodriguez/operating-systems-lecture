@@ -6,9 +6,10 @@
 #include <sys/syscall.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #define STDOUT         1
-#define NUM_THREADS    1000
+#define NUM_THREADS    5
 #define TIMEOUT        10
 
 typedef int File;
@@ -18,13 +19,22 @@ const int bufSize = 512;
 char buffer[bufSize];
 const char *test_file = "/dev/null";
 
+double total_time=0;
+
 void timer() {
     sleep(TIMEOUT);
+	printf("Average time used in syscalls: %f\n",total_time/NUM_THREADS);
     exit(0);
 }
 
 void *call_syscall()
 {
+
+     
+     clock_t start, end;
+     double cpu_time_used;
+     
+     start = clock();
 //TODO make this in a loop to streas syscalls
 //    while(1){
 	    if ((fileOrigin = syscall(SYS_open,test_file, O_RDONLY)) < 0) {
@@ -39,6 +49,11 @@ void *call_syscall()
 	    }
 	close(fileOrigin);
  //   }
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    total_time +=cpu_time_used;
+	printf("Time used in syscalls: %f\n",cpu_time_used);
     pthread_exit(NULL);
 }
 
