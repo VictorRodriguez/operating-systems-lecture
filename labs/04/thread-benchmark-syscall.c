@@ -23,7 +23,7 @@ double total_time=0;
 
 void timer() {
     sleep(TIMEOUT);
-	printf("Average time used in syscalls: %f\n",total_time/NUM_THREADS);
+	printf("Average time used in syscalls: %f seconds\n",total_time/NUM_THREADS);
     exit(0);
 }
 
@@ -53,7 +53,6 @@ void *call_syscall()
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     total_time +=cpu_time_used;
-	printf("Time used in syscalls: %f\n",cpu_time_used);
     pthread_exit(NULL);
 }
 
