@@ -4,8 +4,10 @@ all:
 	ar -t libtest.a
 	gcc -o program program.c libtest.a
 	gcc -o load_example load_example.c -ldl
+	gcc segfault.c -o segfault
 
 clean:
 	rm -rf *.a
 	rm -rf *.o
 	rm -rf program
+	rm -rf segfault
