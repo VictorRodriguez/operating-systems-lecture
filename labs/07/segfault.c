@@ -13,14 +13,22 @@
  * presented above, we will definitely overwrite the return address kept in the
  * stack of this function and will cause a segmentation fault to happen. 
  *
- *
+ * As can be clearly seen, in the first attempt, the code worked fine but in
+ * the second attempt, a large command line argument probably overwrote the
+ * return address stored on stack of the function func() and hence when the
+ * control went back to this overwritten value any damn thing could have caused
+ * a segmentation fault as this memory location mostly(until you are very
+ * lucky) does not belong to our process. 
+ * 
+ * To debug : 
+ *  https://www.cprogramming.com/debugging/valgrind.html
+ *  https://gcc.gnu.org/bugs/segfault.html
  */
 
  void func(char ** argv)
  {
      char arr[2];
      strcpy(arr, argv[1]);
-
      return;
  }
 
