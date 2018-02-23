@@ -10,3 +10,4 @@ avx2:
 	gcc -O3 -mavx2 simple-math-bench.c -o simple-math-bench
 clean:
 	rm -rf simple-math-bench
+	rm -rf perf*
