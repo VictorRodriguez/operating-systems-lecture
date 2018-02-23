@@ -126,3 +126,54 @@ Overhead  Command          Shared Object      Symbol
 
 As we can see the foo function is the one that consume 99.99 % of the time of
 our application, which make sense when we check the source code.
+
+If we compile with debug flag : -g 
+
+```
+make debug
+```
+
+simple-math-ben -> Annotate foo: 
+
+We can see the exact code in simple-math-bench.c that is spending most of the %
+of the CPU usage: 
+
+```
+Percent│      mov    -0xc18(%rbp),%rax
+       │      imul   -0xc18(%rbp),%rax
+       │      mov    %rax,%rsi
+       │      mov    $0x4008c4,%edi
+       │      mov    $0x0,%eax
+       │    → callq  printf@plt
+       │        printf(" math = a[i] = b[i] + c[i]\n");
+       │      mov    $0x4008d7,%edi
+       │    → callq  puts@plt
+       │        for (j=0;j<iter;j++)
+       │      movl   $0x0,-0x8(%rbp)
+       │    ↓ jmp    b2
+       │            for (j=0;j<iter;j++)
+       │57:   movl   $0x0,-0x8(%rbp)
+       │    ↓ jmp    a0
+       │                for (i=0; i<256; i++)
+       │60:   movl   $0x0,-0x4(%rbp)
+       │    ↓ jmp    93
+       │                    a[i] = b[i] + c[i];
+  0.36 │69:   mov    -0x4(%rbp),%eax
+  4.54 │      cltq
+ 19.04 │      mov    -0x810(%rbp,%rax,4),%edx
+ 11.30 │      mov    -0x4(%rbp),%eax
+  0.08 │      cltq
+ 16.43 │      mov    -0xc10(%rbp,%rax,4),%eax
+ 14.93 │      add    %eax,%edx
+  6.95 │      mov    -0x4(%rbp),%eax
+  0.16 │      cltq
+  0.59 │      mov    %edx,-0x410(%rbp,%rax,4)
+       │                for (i=0; i<256; i++)
+  6.99 │      addl   $0x1,-0x4(%rbp)
+  0.67 │93:   cmpl   $0xff,-0x4(%rbp)
+ 17.81 │    ↑ jle    69
+
+```
+
+we can see that the add instruction is consuming %14 of the function time,
+which make sense due to the logic of the code.
