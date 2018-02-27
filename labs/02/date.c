@@ -42,7 +42,12 @@ int main(int argc , char *argv[]){
             case 'w' :
                  seconds = get_time_seconds();
                  weeks = seconds / (7 * 24 * 60 * 60);
+                 seconds % (7 * 24 * 60 * 60);
                  printf("Weeks in this year: %d\n",weeks);
+                 if (seconds % (7 * 24 * 60 * 60) != 0 )
+                     printf("We are running in week: %d \n",weeks+1);
+                 else
+                     printf("We are running in week: %d \n",weeks);
                  break;
              case 'd' :
                  seconds = get_time_seconds();
