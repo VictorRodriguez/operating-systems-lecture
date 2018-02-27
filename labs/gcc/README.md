@@ -9,6 +9,16 @@ to better understand how to improve the performance of their code
 Student must use GCC and a Linux system , is impossible to make this in a not
 Linux system. If possible use a bare metal system, instead of a VM
 
+## Configurations
+
+If you are over ssh be sure to have this in your enviroment: 
+
+```
+    export COLORTERM=truecolor
+```
+
+It will make perf report works with colors (without them is impossible to work)
+
 ### Compile
 
 A step by step series of examples that tell you have to get a development env running
