@@ -1,7 +1,10 @@
 # Power and performance training
 
 This section helps student to understand perf, glibc , strace and other tools
-to better understand how to improve the performance of their code
+to better understand how to improve the performance of their code. This
+tutorial is based on : 
+
+* https://perf.wiki.kernel.org/index.php/Tutorial
 
 
 ### Prerequisites
@@ -69,6 +72,27 @@ framework for all things performance analysis. It covers hardware level
 (CPU/PMU, Performance Monitoring Unit) features and software features (software
 counters, tracepoints) as well.
 
+The perf tool supports a list of measurable events. The tool and underlying
+kernel interface can measure events coming from different sources. For
+instance, some event are pure kernel counters, in this case they are called
+software events. Examples include: context-switches, minor-faults.
+
+Another source of events is the processor itself and its Performance Monitoring
+Unit (PMU). It provides a list of events to measure micro-architectural events
+such as the number of cycles, instructions retired, L1 cache misses and so on.
+Those events are called PMU hardware events or hardware events for short. They
+vary with each processor type and model.
+
+PMU hardware events are CPU specific and documented by the CPU vendor. The perf
+tool, if linked against the libpfm4 library, provides some short description of
+the events. For a listing of PMU hardware events for Intel and AMD processors,
+see
+
+Intel PMU event tables: Appendix A of manual here:
+
+* [Intel® 64 and IA-32 Architectures Developer's Manual](https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.html)
+
+
 ## perf stat
 
 So, let’s imagine you want to know exactly how many CPU instructions happen
@@ -119,16 +143,70 @@ Time in foo: 0.958425 seconds
        0.960023734 seconds time elapsed
 
 ```
+With no events specified, perf stat collects the common events listed above.
+Some are software events, such as context-switches, others are generic hardware
+events such as cycles. After the hash sign, derived metrics may be presented,
+such as 'IPC' (instructions per cycle). You can see see perf list for a full
+list of supported events, a nice picture that shows what part of the OS is
+measuring is:
 
-This is acurate information, and there’s a lot more (see perf list).
+    * http://www.brendangregg.com/perf_events/perf_events_map.png
+
+By default, events are measured at both user and kernel levels:
+
+```
+perf stat -e cycles ./simple-math-bench -i 10000000
+
+```
+You can select which ring to read by: 
+
+* event:u -> user
+* event:k -> kernel
+* event:h -> monitor hypervisor events on a virtualization environment
+* event:H -> monitor host machine on a virtualization environment
+* event:G -> monitor guest machine on a virtualization environment
+
+Check https://perf.wiki.kernel.org/index.php/Tutorial for more info about this
+
+You can record multiple events by : 
+
+```
+perf stat -e cycles,instructions,cache-misses ./simple-math-bench
+```
 
 ## perf record
 
-In order to profile ./simple-math-bench program we can do this with perf:
+The perf tool can be used to collect profiles on per-thread, per-process and
+per-cpu basis.
+
+There are several commands associated with sampling: record, report, annotate.
+You must first collect the samples using perf record. This generates an output
+file called perf.data. That file can then be analyzed, possibly on another
+machine, using the perf report and perf annotate commands.
+
+The perf_events interface allows two modes to express the sampling period:
+
+the number of occurrences of the event (period)
+the average rate of samples/sec (frequency)
+The perf tool defaults to the average rate. It is set to 1000Hz, or 1000 samples/sec.
+
+In order to profile ./simple-math-bench program we can do this basic command
+with perf:
 
 ```
 perf record ./simple-math-bench -i 10000000
 
+```
+
+## perf report
+
+Samples collected by perf record are saved into a binary file called, by
+default, perf.data. The perf report command reads this file and generates a
+concise execution profile. By default, samples are sorted by functions with the
+most samples first. It is possible to customize the sorting order and therefore
+to view the data differently.
+
+```
 perf report
 
 Samples: 3K of event 'cycles:uppp', Event count (approx.): 2768860737
@@ -137,11 +215,40 @@ Overhead  Command          Shared Object      Symbol
    0.01%  simple-math-ben  ld-2.27.so         [.] _dl_map_object_deps
    0.00%  simple-math-ben  [unknown]          [.] 0xffffffffb2c009a0
 ```
+The column 'Overhead' indicates the percentage of the overall samples collected
+in the corresponding function. The second column reports the process from which
+the samples were collected. In per-thread/per-process mode, this is always the
+name of the monitored command. But in cpu-wide mode, the command can vary. The
+third column shows the name of the ELF image where the samples came from. If a
+program is dynamically linked, then this may show the name of a shared library.
+When the samples come from the kernel, then the pseudo ELF image name
+[kernel.kallsyms] is used. The fourth column indicates the privilege level at
+which the sample was taken, i.e. when the program was running when it was
+interrupted:
+
+* [.] : user level
+* [k]: kernel level
+* [g]: guest kernel level (virtualization)
+* [u]: guest os user space
+* [H]: hypervisor
+
+The final column shows the symbol name. (you need to have debug simbols: gcc -g)
 
 As we can see the foo function is the one that consume 99.99 % of the time of
 our application, which make sense when we check the source code.
 
-## perf record (profile code)
+The perf tool does not know how to extract symbols form compressed kernel
+images (vmlinuz). Therefore, users must pass the path of the uncompressed
+kernel using the -k option:
+
+```
+perf report -k /tmp/vmlinux 
+```
+
+Of course, this works only if the kernel is
+compiled to with debug symbols.
+
+## perf record (debug code)
 
 If we compile with debug flag : -g
 
@@ -149,7 +256,9 @@ If we compile with debug flag : -g
 make debug
 ```
 
-simple-math-ben -> Annotate foo:
+We can profile the code by going to : 
+
+    * simple-math-ben -> Annotate foo:
 
 We can see the exact code in simple-math-bench.c that is spending most of the %
 of the CPU usage:
@@ -214,8 +323,8 @@ perf record -g --call-graph dwarf ./simple-math-bench -i 1000000
 ```
 
 More info at :
-    https://gcc.gnu.org/wiki/Perf_Callgraph
-    http://man7.org/linux/man-pages/man1/perf-record.1.html
+    * https://gcc.gnu.org/wiki/Perf_Callgraph
+    * http://man7.org/linux/man-pages/man1/perf-record.1.html
 
 Example:
 
@@ -239,3 +348,34 @@ Time in foo: 0.064133 seconds
      0.06%     0.06%  simple-math-ben  ld-2.27.so         [.] _dl_start
      0.06%     0.00%  simple-math-ben  ld-2.27.so         [.] _start
      0.02%     0.02%  simple-math-ben  [unknown]          [.] 0xffffffffaec009e0
+
+```
+
+## profiling sleep times
+
+This feature shows where and how long a program is sleeping or waiting
+something.
+
+The first step is collecting data. We need to collect sched_stat and
+sched_switch events. Sched_stat events are not enough, because they are
+generated in the context of a task, which wakes up a target task (e.g. releases
+a lock). We need the same event but with a call-chain of the target task. This
+call-chain can be extracted from a previous sched_switch event.
+
+The second step is merging sched_start and sched_switch events. It can be done
+with help of "perf inject -s".
+
+
+```
+$ make debug
+$ perf record -e sched:sched_stat_sleep -e sched:sched_switch  -e sched:sched_process_exit -g -o ~/perf.data.raw ./sleep_example
+$ perf inject -v -s -i ~/perf.data.raw -o ~/perf.data
+$ perf report --stdio --show-total-period -i ~/perf.data
+```
+important take into consideration that you are profiling kernel space calls so
+you need to use  proper sudo or root permissions. Also CONFIG_SCHEDSTATS and
+CONFIG_SCHED_TRACER  should be enabled to make kernel collect scheduler
+statistics.
+
+* https://lwn.net/Articles/510120/
+
