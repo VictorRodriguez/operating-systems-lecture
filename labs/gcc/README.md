@@ -7,7 +7,7 @@ tutorial is based on :
 * https://perf.wiki.kernel.org/index.php/Tutorial
 
 
-### Prerequisites
+## Prerequisites
 
 Student must use GCC and a Linux system , is impossible to make this in a not
 Linux system. If possible use a bare metal system, instead of a VM
@@ -22,7 +22,7 @@ If you are over ssh be sure to have this in your enviroment:
 
 It will make perf report works with colors (without them is impossible to work)
 
-### Compile
+## Compile
 
 A step by step series of examples that tell you have to get a development env running
 
@@ -53,7 +53,7 @@ make avx2
 ```
 
 
-### Execute
+## Execute
 
 ```
 ./simple-math-bench -i 10000000
@@ -379,3 +379,88 @@ statistics.
 
 * https://lwn.net/Articles/510120/
 
+## perf top
+
+The perf tool can operate in a mode similar to the Linux top tool, printing
+sampled functions in real time. The default sampling event is cycles and
+default order is descending number of samples per symbol, thus perf top shows
+the functions where most of the time is spent. By default, perf top operates in
+processor-wide mode, monitoring all online CPUs at both user and kernel levels.
+It is possible to monitor only a subset of the CPUS using the -C option.
+
+```
+Overhead  Shared Object                    Symbol
+  31.87%  [kernel]                         [k] ioread32
+   3.85%  [kernel]                         [k] flush_tlb_func_common.constprop.3
+   1.94%  [kernel]                         [k] format_decode
+   1.92%  [kernel]                         [k] vsnprintf
+   1.83%  perf                             [.] rb_next
+   1.65%  [kernel]                         [k] kallsyms_expand_symbol.constprop.3
+   1.34%  [kernel]                         [k] string
+   1.19%  [kernel]                         [k] number
+   1.06%  perf                             [.] __symbols__insert
+   1.00%  libc-2.27.so                     [.] cfree@GLIBC_2.2.5
+   0.97%  libc-2.27.so                     [.] _int_malloc
+   0.95%  perf                             [.] rb_insert_color
+   0.95%  libc-2.27.so                     [.] __strchr_avx2
+   0.86%  libc-2.27.so                     [.] _IO_getdelim
+   0.72%  [kernel]                         [k] syscall_return_via_sysret
+   0.70%  libglib-2.0.so.0.5400.3          [.] g_main_context_check
+   0.64%  perf                             [.] hex2u64
+   0.57%  [kernel]                         [k] memcpy_erms
+   0.56%  libc-2.27.so                     [.] __strlen_avx2
+
+```
+By default, the first column shows the aggregated number of samples since the
+beginning of the run. By pressing the 'Z' key, this can be changed to print the
+number of samples since the last refresh. Recall that the cycle event counts
+CPU cycles when the processor is not in halted state, i.e. not idle. Therefore
+this is not equivalent to wall clock time. Furthermore, the event is also
+subject to frequency scaling.
+
+When we execute at the same time our code:
+
+```
+Samples: 8K of event 'cycles:ppp', Event count (approx.): 2047134691
+Overhead  Shared Object                    Symbol
+  76.22%  simple-math-bench                [.] foo
+  10.45%  [kernel]                         [k] ioread32
+   0.87%  [kernel]                         [k] flush_tlb_func_common.constprop.3
+   0.29%  perf                             [.] hists__calc_col_len
+   0.20%  [e1000e]                         [k] e1000_intr_msi
+```
+
+It is also possible to drill down into single functions to see which
+instructions have the most samples. To drill down into a specify function,
+press the 'enter key ' key and enter the name of the function to annotate:
+
+```
+Annotate foo
+Zoom into simple-math-bench DSO
+Browse map details
+Exit
+```
+
+You can then prese H -> Go to hottest instruction
+
+```
+       │                for (i=0; i<256; i++)
+       │60:   movl   $0x0,-0x4(%rbp)
+       │    ↓ jmp    93
+       │                    a[i] = b[i] + c[i];
+  0.24 │69:   mov    -0x4(%rbp),%eax
+  4.46 │      cltq
+ 19.06 │      mov    -0x810(%rbp,%rax,4),%edx
+ 12.03 │      mov    -0x4(%rbp),%eax
+  0.09 │      cltq
+ 16.04 │      mov    -0xc10(%rbp,%rax,4),%eax
+ 14.98 │      add    %eax,%edx
+  6.82 │      mov    -0x4(%rbp),%eax
+
+```
+
+In this case it is the mov with 19% , this make sense when we find out that is
+inside the for loop after the addition of the 2 arrays. 
+
+As we can see perf is a rich tool that can help us to track down buttle necks
+and improve the performance of our system 
