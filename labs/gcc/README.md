@@ -11,7 +11,7 @@ Linux system. If possible use a bare metal system, instead of a VM
 
 ## Configurations
 
-If you are over ssh be sure to have this in your enviroment: 
+If you are over ssh be sure to have this in your enviroment:
 
 ```
     export COLORTERM=truecolor
@@ -39,9 +39,9 @@ Remove all optimization flags and add -g for glibc debug
 make debug
 ```
 
-* SIMD: 
+* SIMD:
 
-We can build for SSE/AVX/AVX2 flags and compare perforamnce 
+We can build for SSE/AVX/AVX2 flags and compare perforamnce
 
 ```
 make sse
@@ -69,6 +69,8 @@ framework for all things performance analysis. It covers hardware level
 (CPU/PMU, Performance Monitoring Unit) features and software features (software
 counters, tracepoints) as well.
 
+## perf stat
+
 So, let’s imagine you want to know exactly how many CPU instructions happen
 when you run ls. It turns out that your CPU stores information about this kind
 of thing! And perf can tell you. Here’s what the answer looks like, from perf
@@ -94,7 +96,7 @@ Makefile  perf.data  perf.data.old  README.md  sanity.c  simple-math-bench  simp
 
 ```
 
-Consider now the example we have: 
+Consider now the example we have:
 
 ```
 $ perf stat ./simple-math-bench -i 10000000
@@ -118,7 +120,9 @@ Time in foo: 0.958425 seconds
 
 ```
 
-This is super neat information, and there’s a lot more (see perf list).
+This is acurate information, and there’s a lot more (see perf list).
+
+## perf record
 
 In order to profile ./simple-math-bench program we can do this with perf:
 
@@ -137,16 +141,18 @@ Overhead  Command          Shared Object      Symbol
 As we can see the foo function is the one that consume 99.99 % of the time of
 our application, which make sense when we check the source code.
 
-If we compile with debug flag : -g 
+## perf record (profile code)
+
+If we compile with debug flag : -g
 
 ```
 make debug
 ```
 
-simple-math-ben -> Annotate foo: 
+simple-math-ben -> Annotate foo:
 
 We can see the exact code in simple-math-bench.c that is spending most of the %
-of the CPU usage: 
+of the CPU usage:
 
 ```
 Percent│      mov    -0xc18(%rbp),%rax
@@ -187,3 +193,49 @@ Percent│      mov    -0xc18(%rbp),%rax
 
 we can see that the add instruction is consuming %14 of the function time,
 which make sense due to the logic of the code.
+
+
+## perf record call-graph
+
+To get useful call-graphs build the compiler with -fno-omit-frame-pointer
+
+Enable call-graph recording with -g, this enables call-graph (stack
+chain/backtrace) recording.
+
+```
+perf record -g ./simple-math-bench -i 1000000
+
+```
+or
+
+```
+perf record -g --call-graph dwarf ./simple-math-bench -i 1000000
+
+```
+
+More info at :
+    https://gcc.gnu.org/wiki/Perf_Callgraph
+    http://man7.org/linux/man-pages/man1/perf-record.1.html
+
+Example:
+
+```
+$ perf record -g --call-graph dwarf ./simple-math-bench -i 100000
+Running foo
+iterations = 10000000000
+ math = a[i] = b[i] + c[i]
+Time in foo: 0.064133 seconds
+[ perf record: Woken up 9 times to write data ]
+[ perf record: Captured and wrote 2.103 MB perf.data (261 samples) ]
+
+  Children      Self  Command          Shared Object      Symbol
++   99.17%    99.17%  simple-math-ben  simple-math-bench  [.] foo
++   99.17%     0.00%  simple-math-ben  simple-math-bench  [.] _start
++   99.17%     0.00%  simple-math-ben  libc-2.27.so       [.] __libc_start_main
+-   99.17%     0.00%  simple-math-ben  simple-math-bench  [.] main
+     main
+     foo
++    0.75%     0.75%  simple-math-ben  [unknown]          [.] 0xffffffffaec00180
+     0.06%     0.06%  simple-math-ben  ld-2.27.so         [.] _dl_start
+     0.06%     0.00%  simple-math-ben  ld-2.27.so         [.] _start
+     0.02%     0.02%  simple-math-ben  [unknown]          [.] 0xffffffffaec009e0
