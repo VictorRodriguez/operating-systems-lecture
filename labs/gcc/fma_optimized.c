@@ -32,8 +32,11 @@ int main ( int argc, char *argv[] ){
     __m256 b = _mm256_set_ps(2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0);
     __m256 c = _mm256_set_ps(3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0);
 
-    __m256 result = multiply_and_add(a,b,c);
+    __m256 result;
 
+    for (int j=0;j < 0xFFFFFFF;j++){
+        result = multiply_and_add(a,b,c);
+    }
     float* f = (float*)&result;
     printf("%f %f %f %f %f %f %f %f\n",
             f[0], f[1], f[2], f[3], f[4], f[5], f[6], f[7]);

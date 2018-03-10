@@ -34,8 +34,10 @@ int main ( int argc, char *argv[] ){
     float b[8] = {2,2,2,2,2,2,2,2};
     float c[8] = {3,3,3,3,3,3,3,3};
     float d[8];
-    
-    multiply_and_add(a,b,c,d);
+   
+    for (int j=0;j < 0xFFFFFFF;j++){
+        multiply_and_add(a,b,c,d);
+    }
 
     for (int i=0; i< sizeof(d)/sizeof(float) ; i++){
         printf("%f\n",d[i]);
