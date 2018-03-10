@@ -12,6 +12,7 @@ avx2:
 	gcc -O3 -mavx2 simple-math-bench.c -o simple-math-bench
 fma:
 	gcc fma.c -o fma
+	gcc -march=haswell fma_optimized.c -o fma_optimized
 clean:
 	rm -rf a.out
 	rm -rf simple-math-bench
@@ -19,3 +20,4 @@ clean:
 	rm -rf perf*
 	rm -rf builtin_cpu_supports
 	rm -rf fma
+	rm -rf fma_optimized
