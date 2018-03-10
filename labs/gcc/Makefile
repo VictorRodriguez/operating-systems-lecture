@@ -10,8 +10,12 @@ avx:
 	gcc -O3 -mavx simple-math-bench.c -o simple-math-bench
 avx2:
 	gcc -O3 -mavx2 simple-math-bench.c -o simple-math-bench
+fma:
+	gcc fma.c -o fma
 clean:
+	rm -rf a.out
 	rm -rf simple-math-bench
 	rm -rf sleep_example
 	rm -rf perf*
 	rm -rf builtin_cpu_supports
+	rm -rf fma
