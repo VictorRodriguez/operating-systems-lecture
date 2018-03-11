@@ -1,6 +1,9 @@
 all:
 	gcc simple-math-bench.c -o simple-math-bench
 	gcc builtin_cpu_supports.c -o builtin_cpu_supports
+	gcc add.c -o add
+	gcc -O3 add_avx2.c -o add_avx2 -march=haswell
+	gcc -O3 add_aligned.c -o add_aligned -march=haswell
 debug:
 	gcc -g -O0 simple-math-bench.c -o simple-math-bench
 	gcc -O0 -g sleep_example.c -o sleep_example
@@ -21,3 +24,6 @@ clean:
 	rm -rf builtin_cpu_supports
 	rm -rf fma
 	rm -rf fma_optimized
+	rm -rf add
+	rm -rf add_aligned
+	rm -rf add_avx2
