@@ -1,0 +1,137 @@
+<html ng-app="vavapp" >
+<meta charset="UTF-8">
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+
+ <script src="src/js/ctrl.js"></script>
+  </head>
+<body>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/main.min.css">
+
+    <div class=" photos-background" ng-controller="vavappCtrl">
+      <div class="bg">
+      </div>
+<div class="black-background">
+  </div>
+
+      <nav>
+        <img ng-click="playSound()" src="img/tyrannosaurus-rex.svg">
+        <p ng-click="playSound()">VaVapp</p>
+        <p  ng-click="playSound()" class="a-title">{{title}}</p>
+      </nav>
+
+      <div class="navigation-menu">
+        <div class="nav-button" ng-click="clear('Round-Robin')">
+          <p>Round Robin</p>
+          <img src="img/timer.svg">
+        </div>
+        <div class="nav-button" ng-click="clear('First Come First Served')">
+          <p>FCFS</p>
+          <img src="img/chart-gantt.svg">
+        </div>
+      </div>
+      <div class="flex-cont main">
+
+
+
+      <div class="process-list">
+        <p class="create-p">Create a Process</p>
+        <input type="number" ng-model="quantum" ng-show="title=='Round-Robin'" placeholder="Quantum">
+        <input type="number" ng-model="contextSwitch" ng-show="title=='Round-Robin'" placeholder="Context switch">
+        <div class="titles-cont" ng-show="processNumber>1">
+          <p class="green">Process</p>
+          <p class="green">Burst time</p>
+        </div>
+
+        <ul>
+   <li ng-repeat="x in process">
+     <p class="x-id">{{x.id+":"}}</p>
+     <p class="x-num">{{x.num}}ms</p>
+ <span ng-click="removeProcess($index)" class="pointer">&times;</span>
+   </li>
+ </ul>
+ <input ng-model="addNewProcess" placeholder="Insert burst time">
+    <button class="green-btn" ng-click="addProcess()">+</button>
+    <button class="go-btn" ng-click="fcfsAlg()" ng-show="title=='First Come First Served'">Go</button>
+    <button class="go-btn" ng-click="roundRobin()" ng-show="title=='Round-Robin'">Go</button>
+    <p class="error">{{errortext}}</p>
+      </div>
+
+      <div class="graph-cont" ng-show="rrResults">
+        <p class="create-p">Gantt Chart</p>
+        <div id="graph">
+
+        </div>
+     </div>
+
+       <div ng-show="rrResults" id="chart_div"></div>
+       <div ng-show="showResults" id="fcfs_chart"></div>
+
+
+      <div ng-show="showResults" class="results">
+
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{totalWaitTime}}<span class="unit">ms</span></p>
+          <p class="label">Total Wait Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{avgWaitTime}}<span class="unit">ms</span></p>
+          <p class="label">Average Waiting Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{turnaround}}<span class="unit">ms</span></p>
+          <p class="label">Total Turnaround Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{avgTurnaroudTime}}<span class="unit">ms</span></p>
+          <p class="label">Average Turnaround Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{throughput}}<span class="unit">jobs/sec</span></p>
+          <p class="label">Throughput</p>
+        </div>
+      </div>
+
+      <div ng-show="rrResults" class="results">
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{turnaround}}<span class="unit">ms</span></p>
+          <p class="label">Total Turnaround Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{avgTurnaroudTime}}<span class="unit">ms</span></p>
+          <p class="label">Average Turnaround Time</p>
+        </div>
+        <div class="result-cont">
+          <div class="blur">
+          </div>
+          <p class="num">{{contextSwitchNum}}<span class="unit">times</span></p>
+          <p class="label">Context Switch</p>
+        </div>
+      </div>
+
+
+
+</div>
+    </div>
+
+
+
+</body>
+</html>
