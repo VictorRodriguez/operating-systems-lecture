@@ -13,7 +13,7 @@
             exit(1);
         }
 
-        cosine = dlsym(handle, "tan");
+        cosine = dlsym(handle, "cos");
         if ((error = dlerror()) != NULL)  {
             fputs(error, stderr);
             exit(1);
