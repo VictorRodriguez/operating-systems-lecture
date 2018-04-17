@@ -56,6 +56,16 @@ is said to have passed the test. The test does not check the ability to give
 correct answers to questions, only how closely answers resemble those a human
 would give.
 
-
 The students should do this with a server-client application in C ussing the
 inter process communication techiniques that we learn on the semester.
+
+## Report and presentation 
+
+Presentation shoudl be done in front of the team with a writen report made in
+latex. The template for it is: 
+
+* https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/projects/report.tex
+
+You have to send the mail with latex code and pdf generated. 
+
+
