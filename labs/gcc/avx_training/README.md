@@ -25,9 +25,32 @@ article](https://lwn.net/Articles/691932/)
 But how to use these instructions in simple math applications? and how do they
 look internally? How do they improve the performance ? 
 
-Lets start with a sinmple code: 
+Lets start with a sinmple code: add.c
 
+```C
+    for (int x=0; x<MAX; x++){
+        for (int i=0; i<256; i++){
+            a[i] = b[i] + c[i];
+        }
+    }
+```
 
+This is a good candidate for SIMD optimization. 
 
+Ussing the AVX technology it coudl be translated to : add_avx2.c
+
+```C
+    __m256 result,B,C;
+    for (int x=0; x<MAX; x++){
+        for (int i=0; i<256; i+=8){
+            B =  _mm256_load_ps(&b[i]);
+            C =  _mm256_load_ps(&c[i]);
+            result = _mm256_add_ps(B,C);
+            for ( int j=0;j<8;j++){
+                a[j] = result[j];
+            }
+        }
+    }
+```
 
 
