@@ -83,3 +83,9 @@ real	0m0.001s
 user	0m0.000s
 sys	0m0.001s
 ```
+
+For more examples please refer this good tutorial:
+https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX
+
+And Intel® 64 and IA-32 Architectures Software Developer’s Manual
+
