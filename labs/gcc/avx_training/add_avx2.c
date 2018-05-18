@@ -35,11 +35,11 @@ void foo(){
             C =  _mm256_load_ps(&c[i]);
             result = _mm256_add_ps(B,C);
             for ( int j=0;j<8;j++){
-                a[j] = result[j];
+                a[i+j] = result[j];
             }
         }
     }
-    printf ( "%f\n",a[0] );
+    printf ( "%f\n",a[255] );
 }
 
 
