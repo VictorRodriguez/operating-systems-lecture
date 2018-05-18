@@ -1,4 +1,4 @@
-# Power and performance training
+# Performance debug/tuning training
 
 This section helps student to understand perf, glibc , strace and other tools
 to better understand how to improve the performance of their code. This
