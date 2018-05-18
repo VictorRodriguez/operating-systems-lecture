@@ -198,6 +198,22 @@ perf record ./simple-math-bench -i 10000000
 
 ```
 
+If some event event has raw counts more than several hundreds or thousands and
+target program runs for more than several milliseconds, you may use perf record
+-e event (or perf record -e event:u to not profile kernel code). perf record
+usually autotune sample rate to around several kHz (for example if your program
+has 100 millions of cycles, perf record may select around every 1 mln cycles as
+sample generator), and events with too low raw counter value may not generate
+any samples. You also may set event count for every sample with -c option of
+perf record, in this example we asked perf record to generate sample after
+every 10000 cycles spent in userspace code of program; zero samples will be
+generated for program which runs for 8469 cycles:
+
+```
+perf record -e cycles:u -c 10000 ./pi-serial-ps
+
+```
+
 ## perf report
 
 Samples collected by perf record are saved into a binary file called, by
