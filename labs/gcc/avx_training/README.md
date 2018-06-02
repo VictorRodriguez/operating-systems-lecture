@@ -52,37 +52,39 @@ Ussing the AVX technology it coudl be translated to : add_avx2.c
         }
     }
 ```
-In my case this is the diference for each case : 
-
+## BUILD INSTRUCTIONS
 
 ```
 $ make
--g -O3 -feliminate-unused-debug-types -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=32 -Wformat -Wformat-security -Wl,--copy-dt-needed-entries -m64 -fasynchronous-unwind-tables -Wp,-D_REENTRANT -ftree-loop-distribute-patterns -Wl,-z -Wl,now -Wl,-z -Wl,relro -fno-semantic-interposition -ffat-lto-objects -fno-signed-zeros -fno-trapping-math -fassociative-math -Wl,-sort-common -Wl,--enable-new-dtags
-gcc add.c -o add
-gcc -O3 -march=haswell add.c -o add-flag-haswell
-gcc -O3 -march=haswell add_avx2.c -o add-intrinsic
 
-$ time ./add
-result=3
-
-real	0m11.865s
-user	0m11.855s
-sys	0m0.000s
-
-$ time ./add-flag-haswell
-result=3
-
-real	0m7.572s
-user	0m7.565s
-sys	0m0.001s
-
-$ time ./add-intrinsic
-result=3.000000
-
-real	0m0.001s
-user	0m0.000s
-sys	0m0.001s
 ```
+
+## RUN
+
+For the addition code using compiler flags we can specify the delay in micro seconds:
+
+```
+$ ./add -h
+-h : Help
+-d <delay> : Delay in useconds
+
+$ ./add -d 100
+Loops: 1000000
+Delay per function: 0.0001 in seconds
+Total time: 2.29071 seconds to execute
+foo() took 2.29071e-06 seconds in avg to execute
+
+or 
+
+$ ./add-march-haswell -d 100
+
+or 
+
+$ ./add_intrinsic-avx2 -d 100
+
+```
+The number of loops is in add.h
+
 
 For more examples please refer this good tutorial:
 https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX
