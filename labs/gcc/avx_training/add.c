@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  sort.c
+ *       Filename:  add.c
  *
  *    Description:  
  *
@@ -28,12 +28,9 @@ int b[256] = {0};
 int c[256] = {0};
 
 void foo(){
-    for (int x=0; x<MAX; x++){
         for (int i=0; i<256; i++){
             a[i] = b[i] + c[i];
         }
-    }
-    printf("a=%d\n",a[0]);
 }
 
 
@@ -44,6 +41,18 @@ int main(){
         c[i] = 2;
 
     }
-    foo();
+
+    for (int x=0; x<MAX; x++){
+        foo();
+    }
+
+    for (int i=0; i<256; i++){
+        if (a[i] == 3)
+            continue;
+        else
+            printf("FAIL, corruption in arithmetic");
+            return -1;
+    }
+
     return 0;
 }
