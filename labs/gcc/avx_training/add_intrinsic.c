@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  sort.c
+ *       Filename:  add_intrinsic.c
  *
  *    Description:  
  *
@@ -20,8 +20,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <immintrin.h>
-
-#define MAX 100000000
+#include "add.h"
 
 float a[256] = {0}; 
 float b[256] = {0};
@@ -29,7 +28,6 @@ float c[256] = {0};
 
 void foo(){
     __m256 result,B,C;
-    for (int x=0; x<MAX; x++){
         for (int i=0; i<256; i+=8){
             B =  _mm256_load_ps(&b[i]);
             C =  _mm256_load_ps(&c[i]);
@@ -38,8 +36,6 @@ void foo(){
                 a[i+j] = result[j];
             }
         }
-    }
-    printf ( "%f\n",a[255] );
 }
 
 
@@ -50,6 +46,17 @@ int main(){
         c[i] = 2.0;
 
     }
-    foo();
+
+    for (int x=0; x<MAX; x++){
+        foo();
+    }
+
+    for (int i=0; i<256; i++){
+        if (a[i] == 3)
+            continue;
+        else
+            printf("FAIL, corruption in arithmetic");
+            return -1;
+    }
     return 0;
 }

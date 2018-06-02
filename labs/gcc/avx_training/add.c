@@ -18,10 +18,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
-#include <immintrin.h>
-
-#define MAX 100000000
+#include <time.h>
+#include "add.h"
 
 int a[256] = {0}; 
 int b[256] = {0};
@@ -36,15 +34,23 @@ void foo(){
 
 int main(){
 
+    clock_t t;
+    double avg_time_taken;
+    double time_taken;
+
     for (int i=0; i<256; i++){
         b[i] = 1;
         c[i] = 2;
 
     }
 
+    t = clock();
     for (int x=0; x<MAX; x++){
         foo();
     }
+    t = clock() - t;
+    avg_time_taken = ((double)t)/CLOCKS_PER_SEC/MAX;
+    time_taken = ((double)t)/CLOCKS_PER_SEC;
 
     for (int i=0; i<256; i++){
         if (a[i] == 3)
@@ -53,6 +59,9 @@ int main(){
             printf("FAIL, corruption in arithmetic");
             return -1;
     }
-
+    
+    printf("Loops: %d\n",MAX);
+    printf("Total time: %.9g seconds to execute \n",time_taken);
+    printf("foo() took %.9g seconds in avg to execute \n", avg_time_taken);
     return 0;
 }
