@@ -11,6 +11,7 @@ This example simply exploit the buffer by smashing the stack and modifying the
 return address of the function. This will be used to call some other function.
 It is based on this good
 [tutorial](https://dhavalkapil.com/blogs/Buffer-Overflow-Exploit/) 
+[theory](http://www.cis.syr.edu/~wedu/seed/Book/book_sample_buffer.pdf)
 
 
 ```
