@@ -1,0 +1,97 @@
+code push 1
+code push 2
+code call fred
+code sp+= 8
+code ...
+label fred
+code sp-= 20
+code read
+code sp+= 20
+code ret
+draw
+push 1
+draw
+push 2
+draw
+call fred
+draw
+sp-= 20
+draw
+read hell o_wo rld
+draw
+sp+= 20
+draw
+ret
+draw
+sp+= 8
+draw
+
+init
+code push 1
+code push 2
+code call fred
+code sp+= 8
+code ...
+label fred
+code sp-= 20
+code read
+code sp+= 20
+code ret
+push 1
+push 2
+call fred
+sp-= 20
+read hell o_wo rld_ with a_ver y_lon _str
+draw
+sp+= 20
+draw
+ret
+draw
+
+init
+code push 1
+code push 2
+code call fred
+code sp+= 8
+code ...
+label fred
+code sp-= 20
+code read
+code sp+= 20
+code ret
+push 1
+push 2
+call fred
+sp-= 20
+read hell o_wo rld_ with a_ver 8001
+draw
+sp+= 20
+draw
+ret
+draw
+
+init
+code r1= 1
+code r2= 2
+code call fred
+code ...
+label fred
+code sp-= 20
+code read
+code sp+= 20
+code ret
+r1= 1
+draw
+r2= 2
+draw
+call fred
+draw
+sp-= 20
+draw
+read hell o_wo rld
+draw
+sp+= 20
+draw
+ret
+draw
+

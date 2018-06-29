@@ -1,0 +1,15 @@
+  digraph A_124 { 
+  // graph from left to right
+  rankdir=LR;
+  splines=true;
+#  overlap=true;
+  node [shape=box];
+  pc [shape=circle, pos="3,0!"]
+  sp [shape=circle, pos="2,0!"]
+  add24 [pos="2,1!", label="+24"]
+stack [shape=record, label="|...||<v1>1|2|8004|???|???|???|o_wo|<sp>hell", pos="0,0!"]
+code [shape=record, pos="5,0!", label="|<c1>push 1 |<c2>push 2 |<c3>call fred |<c4>sp+= 8 |<c5>...  ||<c6>fred: sp-= 20 |<c7>read  |<c10> load *(sp+24)| <c8>sp+= 20 |<c9>ret  "]
+pc -> code:c10
+sp -> stack:sp
+sp -> add24 -> stack:v1
+}
