@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 
   if(modified == 0x61626364) {
       printf("you have correctly got the variable to the right value\n");
+      printf("You got 0x%08x\n", modified);
   } else {
       printf("Try again, you got 0x%08x\n", modified);
   }
