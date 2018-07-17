@@ -3,9 +3,10 @@
 
 int main() {
 	int *a;
-	for (int i = 0; i < 10; i++) {
+    int i;
+	for (i = 0; i < 10; i++) {
 		a = malloc(100000);
-		printf("%p\n", a);
+		printf("%ls\n", a);
 	}
 	return 0;
 }
