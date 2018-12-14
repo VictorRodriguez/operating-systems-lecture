@@ -18,6 +18,21 @@ It is based on this good
     $ gcc vuln.c -o vuln -m32 -O0
     $ python2 -c 'print "a"*32 + "\xb2\x84\x04\x08"' | ./vuln
 ```
+
+IMPORTANT: To compile 32 bit binaries on 64 bit Linux version, you have to Install libx32gcc development package and 32 bit GNU C Library
+
+try this
+
+```
+sudo apt-get install libx32gcc-4.8-dev
+```
+
+and
+
+```
+sudo apt-get install libc6-dev-i386
+```
+
 For the case of vuln-variable
 
 ```
