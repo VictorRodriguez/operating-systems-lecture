@@ -1,4 +1,8 @@
 #include <stdio.h>
+/*
+ * IMPORTANT: To compile 32 bit binaries on 64 bit Linux version, you have to
+ * Install libx32gcc development package and 32 bit GNU C Library
+ */
 
 void secretFunction()
 {
