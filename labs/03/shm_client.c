@@ -44,8 +44,8 @@ main()
     putchar('\n');
 
     /*
-     * Finally, change the first character of the 
-     * segment to '*', indicating we have read 
+     * Finally, change the first character of the
+     * segment to '*', indicating we have read
      * the segment.
      */
     *shm = '*';

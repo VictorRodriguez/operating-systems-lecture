@@ -45,9 +45,9 @@ main()
     *s = NULL;
 
     /*
-     * Finally, we wait until the other process 
+     * Finally, we wait until the other process
      * changes the first character of our memory
-     * to '*', indicating that it has read what 
+     * to '*', indicating that it has read what
      * we put there.
      */
     while (*shm != '*')

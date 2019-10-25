@@ -27,9 +27,9 @@ int main(void) {
     String* splitted;
     //String arg[] = {"ls", "-la", NULL};
 
-    //read(STDIN, args, MAX_LINE/2 + 1);	
+    //read(STDIN, args, MAX_LINE/2 + 1);
 	//int i, upper;
-    while (should_run){   
+    while (should_run){
         //printf("osh>\n");
         //fflush(stdout);
         write(STDOUT, sh, sizeof(sh));
