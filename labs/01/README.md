@@ -26,6 +26,7 @@ developers such as:
 
 ## Expected result:
 
+```
 /* Hello World program */
 
 #include <stdio.h>
@@ -35,6 +36,7 @@ int main(void) {
     printf("My name is Student Name \n");
     return 0; 
 }
+```
 
 ## Please send the mail as git send mail:
 
