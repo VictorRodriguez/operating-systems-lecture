@@ -28,6 +28,13 @@ Create a code that does this:
 
 ```
 ./my_terminal
+osh> ls
+failing    multiple-forks.c  shm_server    simple-fork.c       simple-shared	simple-shell.c	waitp-example.c
+failing.c  shm_client	     shm_server.c  simple-fork-exec    simple-shared.c	test
+Makefile   shm_client.c      simple-fork   simple-fork-exec.c  simple-shell	waitp-example
+osh> pwd
+/home/vrodri3/operating-systems-lecture/labs/03
+
 ```
 
 ## Please send the mail as git send mail:
