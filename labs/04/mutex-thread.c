@@ -15,9 +15,8 @@ pthread_mutex_t lock;
 
 void* doSomeThing(void *arg)
 {
-//    pthread_mutex_lock(&lock);
+	pthread_mutex_lock(&lock);
     unsigned long i = 0;
-    
     counter += 1;
     printf("\n Job %d started\n", counter);
 
@@ -25,7 +24,7 @@ void* doSomeThing(void *arg)
     }
 
     printf("\n Job %d finished\n", counter);
-//    pthread_mutex_unlock(&lock);
+	pthread_mutex_unlock(&lock);
 
     return NULL;
 }

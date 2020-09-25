@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <stdlib.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <stdio.h>
@@ -40,7 +41,7 @@ main()
      */
     s = shm;
 
-    for (c = 'a'; c <= 'z'; c++)
+    for (c = 'A'; c <= 'Z'; c++)
         *s++ = c;
     *s = NULL;
 
