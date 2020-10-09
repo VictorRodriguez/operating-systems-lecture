@@ -11,8 +11,11 @@ Make the students familiar with Round-robin scheduling
 
 ## Instructions
 
+Lets make a tool that graph time quantum vs average turn around time ( every context switch will cost 2 ut)
 
 ## Expected result:
+
+Please send the patch with your code in python and a link to the graph on the top comments
 
 ## Please send the mail as git send mail:
 
