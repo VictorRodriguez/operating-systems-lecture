@@ -20,7 +20,7 @@ Please send the patch with your code in python and a link to the graph on the to
 ## Please send the mail as git send mail:
 
     ```
-        $ git add asm-analytics.sh
+        $ git add round-robin.py
         $ git commit -s -m <STUDENT-ID>-homework-04
         $ git send-email -1
 
