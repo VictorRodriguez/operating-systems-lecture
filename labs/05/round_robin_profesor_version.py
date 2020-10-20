@@ -2,15 +2,15 @@
 #
 # Round Robin calculator
 #
-# Simulate the Round Robin mechanism based on a queue of processes 
+# Simulate the Round Robin mechanism based on a queue of processes
 # Print the Avg turn around time
-# 
+#
 # It can be used from command line
 #
-# process = [] might be a random list of elapsed times 
+# process = [] might be a random list of elapsed times
 #
 # Experiment with this and make 3D graphs for:
-#   
+#
 #   avg_turn_time vs quantum vs max process size
 #
 #   context_switch vs  quantum vs context_switchs

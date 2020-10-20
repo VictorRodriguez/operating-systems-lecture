@@ -3,7 +3,7 @@
  *
  *       Filename:  semaphore_simple.c
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  03/13/2018 10:15:45 PM
@@ -11,7 +11,7 @@
  *       Compiler:  gcc
  *
  *         Author:  Victor Rodriguez (), vm.rod25@gmail.com
- *   Organization:  
+ *   Organization:
  *
  * =====================================================================================
  */
@@ -35,30 +35,30 @@ void threadfunc() {
 }
 
 int main(void) {
-    
+
     // initialize semaphore, only to be used with threads in this process, set value to 1
     sem_init(&semaphore, 0, 1);
-    
+
     pthread_t *mythread;
-    
+
     mythread = (pthread_t *)malloc(sizeof(*mythread));
-    
+
     // start the thread
     printf("Starting thread, semaphore is unlocked.\n");
     pthread_create(mythread, NULL, (void*)threadfunc, NULL);
-    
+
     getchar();
-    
+
     sem_wait(&semaphore);
     printf("Semaphore locked.\n");
-    
+
     // do stuff with whatever is shared between threads
     getchar();
-    
+
     printf("Semaphore unlocked.\n");
     sem_post(&semaphore);
-    
+
     getchar();
-    
+
     return 0;
 }
