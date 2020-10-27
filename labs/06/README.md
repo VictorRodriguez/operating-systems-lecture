@@ -25,7 +25,7 @@ Please send the patch with your code in C using MUTEX or SEMAPHORES ( op to you 
 ## Please send the mail as git send mail:
 
     ```
-        $ git add round-robin.py
+        $ git add milk_seller.c
         $ git commit -s -m <STUDENT-ID>-homework-06
         $ git send-email -1
 
