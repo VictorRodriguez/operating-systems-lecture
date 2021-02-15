@@ -2,12 +2,10 @@
 
 ## Objective
 
-Make the students get familiar with the operating system tools and some basics as sw
-developers such as:
+Make the students get familiar with the operating system tools to:
 
-* How to compile from the command line
-* How to read the object file in the command line
-* How to automate the analysis of ASM code
+* Compile from the command line
+* Configure SMPT server to do git send-email
 
 # Requirements
 
@@ -40,16 +38,16 @@ int main(void) {
 
 ## Please send the mail as git send mail:
 
-    ```
-        $ git add hello.c
-        $ git commit -s -m <STUDENT-ID>-homework-01
-        $ git send-email -1
+```
+    $ git add hello.c
+    $ git commit -s -m <STUDENT-ID>-homework-01
+    $ git send-email -1
+```
 
-    ```
 Do some tests sending the mail to your personal account, if you get the mail,
 then you can be sure I will get the mail
 
 # Time to do the homework:
 
-    one week from the moment the mail is sent to students
+    One week from the moment the mail is sent to students
 
