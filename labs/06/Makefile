@@ -2,7 +2,7 @@ all:
 	gcc -lpthread  race_condition_semaphores.c -o race_condition_semaphores
 	gcc -lpthread  race_condition.c -o race_condition
 	gcc -lpthread  peterson.c -o peterson
-	
+	gcc -lpthread philosopher.c -o philosopher
 	g++ -DUSE_SPINLOCK -Wall -pthread spin_lock.c -o spin_lock
 	gcc client.c -o client -pthread
 	gcc server.c -o server -pthread
