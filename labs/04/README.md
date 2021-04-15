@@ -69,7 +69,7 @@ the link could be to a google documents pdf. please create good graphs:
 ## Please send the mail as git send mail:
 
 ```
-$ git add my_terminal.c
+$ git add pi_calculation.c
 $ git commit -s -m <STUDENT-ID>-homework-04
 $ git send-email -1
 

@@ -37,8 +37,8 @@ Create a code that does this:
 ## Please send the mail as git send mail:
 
 ```
-$ git add hello.c
-$ git commit -s -m <STUDENT-ID>-homework-01
+$ git add chown.c
+$ git commit -s -m <STUDENT-ID>-homework-02
 $ git send-email -1
 
 ```
