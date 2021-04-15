@@ -12,3 +12,5 @@ clean:
 	rm -rf race_condition_semaphores
 	rm -rf peterson
 	rm -rf spin_lock
+	rm -rf client
+	rm -rf philosopher
