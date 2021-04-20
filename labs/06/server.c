@@ -1,11 +1,7 @@
 /*
- *
- * Taken from
- * http://www.linuxdevcenter.com/pub/a/linux/2007/05/24/semaphores-in-linux.html?page=5
- *
- *
- *
- *
+  Taken from
+  http://www.linuxdevcenter.com/pub/a/linux/2007/
+	05/24/semaphores-in-linux.html?page=5
  */
 
 #include <sys/types.h>
@@ -16,6 +12,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 
 #define SHMSZ 27
 char SEM_NAME[]= "vik";

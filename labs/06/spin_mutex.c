@@ -28,8 +28,6 @@ pid_t gettid() { return syscall( __NR_gettid ); }
 
 void *consumer(void *ptr)
 {
-    int i;
-
     printf("Consumer TID %lu\n", (unsigned long)gettid());
 
     while (1)
@@ -50,6 +48,7 @@ void *consumer(void *ptr)
             break;
         }
 
+		int i;
         i = the_list.front();
         the_list.pop_front();
 
