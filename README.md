@@ -77,6 +77,8 @@ Agenda:
 
 
 Oftopic Trainings ( in case you need them ) 
+  * C basic trining:
+    * https://www.linkedin.com/learning/advanced-c-programming/
   * Git training
     * https://drive.google.com/file/d/0B7iKrGdVkDhINERiQnppOU5IVVk/view?usp=sharing
   * Bash Trainings: 
