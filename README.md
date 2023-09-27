@@ -12,7 +12,7 @@ Agenda:
 * OS Architecture
   * Introduction 
     * What is an Operating Systems
-      * https://drive.google.com/open?id=0B7iKrGdVkDhIOElQYnhRU09TWXc
+      * https://drive.google.com/file/d/0B7iKrGdVkDhIOElQYnhRU09TWXc/view?usp=sharing&resourcekey=0-RG3mVzZQO7m7AXlEkKZMyg
     * Operating System Structure
       * https://drive.google.com/file/d/0B7iKrGdVkDhIZVB4RkY4MHdYd2M/view?usp=sharing 
   * Process Management
