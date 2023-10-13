@@ -55,7 +55,7 @@ int main() {
     clear();
     printf("\n");
 
-    while (1) {
+    while (strcmp(input, "exit") != 0) {
         printf("UltimaTerminal> ");
         fgets(input, sizeof(input), stdin);
         input[strlen(input) - 1] = '\0';
@@ -70,8 +70,7 @@ int main() {
         } else if (strcmp(input, "clear") == 0) {
             clear();
         } else if (strcmp(input, "exit") == 0) {
-            printf("Saliendo de UltimaTerminal...\n\n");
-            break;
+            printf("Saliendo de UltimaTerminal...\n");
         } else {
             printf("Comando %s no reconocido.\n", input);
         }
