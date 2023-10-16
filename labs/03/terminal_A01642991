@@ -1,0 +1,156 @@
+//Gabriel Alvarez Arzate - A01642991;
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/syscall.h>
+#include <errno.h>
+#include <sys/stat.h>
+#define STDOUT 1
+
+typedef int File;
+
+typedef int File;
+
+int mi_cat(const char *filename) {  // Cambio del nombre de la función a "mi_cat"
+    printf("\n\n   ******      **     **********\n");
+    printf("  **////**    ****   /////**///\n");
+    printf(" **    //    **//**      /**\n");
+    printf("/**         **  //**     /**\n");
+    printf("/**        **********    /**\n");
+    printf("//**    **/**//////**    /**\n");
+    printf(" //****** /**     /**    /**\n");
+    printf("  //////  //      //     //\n");
+    File fileOrigin;
+    ssize_t readSize;
+    const int bufSize = 512;
+    char buffer[bufSize]; // Buffer de 512 caracteres
+    if ((fileOrigin = syscall(SYS_open, filename, O_RDONLY)) < 0) {
+        fprintf(stderr, "Error al abrir el archivo, error = %d\n", errno);
+        return 1;
+    }
+
+    while ((readSize = syscall(SYS_read, fileOrigin, &buffer, bufSize)) > 0) {
+        if (syscall(SYS_write, STDOUT, &buffer, readSize) < 0) {
+            fprintf(stderr, "write to stdout failed, error = %d\n", errno);
+            return 1;
+        }
+    }
+
+    close(fileOrigin);
+    return 0;
+}
+
+    
+void mi_ls(const char *dir_path){
+    int op=-1;
+    char directorio[500];
+     printf(" **        ********\n");
+    printf("/**       **//////\n");
+    printf("/**      /**\n");
+    printf("/**      /*********\n");
+    printf("/**      ///////**\n");
+    printf("/**             /**\n");
+    printf("/******** ********\n");
+    printf("//////// ////////\n");
+    DIR *directory = opendir(dir_path);
+    if (directory == NULL) {
+        perror("Error, directorio no encontrado o erroneo");
+        return;
+    }
+
+    struct dirent *entry;
+    while ((entry = readdir(directory)) != NULL) {
+        printf("%s\n", entry->d_name);
+    }
+
+    closedir(directory);
+    
+}
+void mi_pwd(){
+    printf("\n\n*******  **       ** *******\n");
+    printf("/**////**/**      /**/**////**\n");
+    printf("/**   /**/**   *  /**/**    /**\n");
+    printf("/******* /**  *** /**/**    /**\n");
+    printf("/**////  /** **/**/**/**    /**\n");
+    printf("/**      /**** //****/**    **\n");
+    printf("/**      /**/   ///**/*******\n");
+    printf("//       //       // ///////\n");
+    char directorio[1024];
+    if (getcwd(directorio, sizeof(directorio)) != NULL) {
+        printf("El directorio actual es: %s\n", directorio);
+    } else {
+        perror("Error al obtener el directorio actual");
+    }
+}
+
+void titulo(){
+    printf("\n\n######   ######   #####    ##   ##   ####    ##  ##     ##     ##\n");
+    printf("  ##     ##       ##  ##   ### ###    ##     ### ##    ####    ##\n");
+    printf("  ##     ##       ##  ##   #######    ##     ######   ##  ##   ##\n");
+    printf("  ##     ####     #####    ## # ##    ##     ######   ######   ##\n");
+    printf("  ##     ##       ####     ##   ##    ##     ## ###   ##  ##   ##\n");
+    printf("  ##     ##       ## ##    ##   ##    ##     ##  ##   ##  ##   ##\n");
+    printf("  ##     ######   ##  ##   ##   ##   ####    ##  ##   ##  ##   ######\n\n");
+}
+
+int main(int argc, char const *argv[]) {
+    int op=-1;
+    char directorio[500];//Creamos la varible del directorio
+    char archivo[500];//Creamos la variable del archivo
+    titulo();
+    while(op!=0){
+        printf("Escoja una opcion de comando:");
+        printf("\n1.-CAT\n2.-LS\n3.-PWD\n0.-Cerrar terminal\nOpcion Deseada: ");
+        scanf("%d",&op);
+        switch(op){
+            case 1:
+                while(op==1){
+                    printf("\nIngresa el nombre del archivo(0 para menu anterior):");//Le pedimos al usuario que ingrese el archivo
+                    scanf("%s",archivo);//El usuario ingresa el nombre del archivo
+                    if(archivo[0]=='0'){
+                        printf("Saliendo de comando cat");
+                        op=-1;
+            }
+            else {
+                mi_cat(archivo);  // Llamamos a la función "mi_cat" del archivo externo para mostrar el contenido del archivo
+                }
+    }
+                titulo();
+                break;
+            case 2:
+                while(op!=-1){
+                    printf("\nEscoja una opcion:");
+                    printf("\n1.-Directorio actual\n2.-Directorio en especifico\n0.-Salir\nOpcion deseada:");
+                    scanf("%d",&op);
+                    if(op==1){
+                        mi_ls(".");
+                    }
+                    else if(op==2){
+                        printf("Ingrese el directorio deseado: ");
+                        scanf("%s",directorio);
+                        mi_ls(directorio);
+                    }else if(op==0){
+                        printf("Saliendo de LS...");
+                        op=-1;
+                    }
+                    else{
+                        printf("Error,opcion invalida\n");
+                    }
+                }
+                titulo();
+                break;
+            case 3: 
+                mi_pwd();
+                titulo();
+                break;
+            case 0:
+                printf("Saliendo de la Terminal...\n");
+                break;
+            default:
+                printf("Opcion no valida:");
+        }   
+    }
+    return 0;
+}
