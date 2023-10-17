@@ -1,6 +1,6 @@
 /**
  * Simple shell interface program.
- *
+ * 
  * Operating System Concepts - Ninth Edition
  * Copyright John Wiley & Sons - 2013
  */
@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define MAX_LINE 80 /* 80 chars per line, per command */
 #define STDIN 0
@@ -21,14 +22,15 @@ typedef char* String;
 String* split(String str, char separator);
 
 int main(void) {
-	char args[MAX_LINE/2 + 1];	/* command line (of 80) has max of 40 characters */
+    char args[256];    /* command line (of 80) has max of 40 characters */
+    
     int should_run = 1;
     const char sh[] = "osh> ";
     String* splitted;
     //String arg[] = {"ls", "-la", NULL};
 
     //read(STDIN, args, MAX_LINE/2 + 1);
-	//int i, upper;
+    //int i, upper;
     while (should_run){
         //printf("osh>\n");
         //fflush(stdout);
@@ -39,27 +41,49 @@ int main(void) {
          * (2) the child process will invoke execvp()
          * (3) if command included &, parent will invoke wait()
          */
-        read(STDIN, args, MAX_LINE/2 + 1);
-        if (strcmp(args, "exit\n") == 0) break;
-        Process pid = fork();
-        if (pid < 0) {
-            fprintf(stderr, "Error forking, errno = %d\n", errno);
-            return 1;
-        } else if (pid == 0) { //Child process
-            //printf("forked child %s\n", args);
-            splitted = split(args, ' ');
-            printf("%d\n", execvp(splitted[0], splitted));
-            free(splitted);
-        } else { //Parent process
-            //printf("waiting\n");
-            wait(NULL);
-            //printf("waited\n");
+        if(fgets(args, sizeof(args), stdin) == NULL) {
+            perror("Error reading input");
+            exit(1);
+        }
+
+        size_t len = strlen(args);
+        if (len > 0 && args[len - 1] == '\n') {
+            args[len - 1] = '\0';
+        }
+
+        if (strcmp(args, "exit") == 0) break;
+        if (strcmp(args, "ls") == 0){
+            system("ls");
+        }
+        else if (strcmp(args, "pwd") == 0){
+            system("pwd");
+        }
+        else{
+            Process pid = fork();
+            if(pid < 0){
+                fprintf(stderr, "Error forking, errno = %d\n", errno);
+                return 1;
+            }
+            else if (pid == 0) { //Child process
+                //printf("forked child %s\n", args);
+                printf("%s\n", args);
+                splitted = split(args, ' ');
+                execvp(splitted[0], splitted);
+                printf("%d\n", execvp(splitted[0], splitted));
+                free(splitted);
+                exit(1);
+            }
+            else{ //Parent process
+                //printf("waiting\n");
+                wait(NULL);
+                //printf("waited\n");
+            }
         }
     }
     //fork();
     //printf("%s has %d characters\n", arg[0], strlen(arg[0]));
-   // printf("%d\n", execvp(arg[0], arg));
-	return 0;
+    // printf("%d\n", execvp(arg[0], arg));
+    return 0;
 }
 
 String* split(String str, char separator) {
