@@ -59,7 +59,7 @@ int main(){
     } else if (strstr(input, "cat") == input){
         char *archOrigen = input + 4;
         char *argv[] = {"cat", archOrigen, NULL};
-        cat(2, argv);
+        michi(2, argv);
     }else if (strcmp(input, "clear") == 0){
         system("clear");
     } else if (strcmp(input, "exit") == 0){
