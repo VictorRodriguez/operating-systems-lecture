@@ -12,7 +12,7 @@ int main() {
     char *token;
     int i;
 
-    printf("./my_terminal\n");
+    printf("./mi_terminal\n");
 
     while (1) {
         printf("osh> ");
