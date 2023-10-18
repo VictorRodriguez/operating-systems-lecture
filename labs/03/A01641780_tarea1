@@ -1,0 +1,50 @@
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
+
+void execute_command(const char *command) {
+    printf("🚀 Creando un nuevo proceso...\n");
+    pid_t pid = fork();
+    if (pid < 0) {
+        fprintf(stderr, "❌ Error: Fork Failed\n");
+        exit(-1);
+    } else if (pid == 0) {
+        printf("👶 Soy el proceso hijo! Mi PID es %d y el PID de mi padre es %d\n", getpid(), getppid());
+        if (strcmp(command, "ls") == 0) {
+            printf("📂 Listando el contenido del directorio actual...\n");
+            execlp("/bin/ls", "ls", NULL);
+        } else if (strcmp(command, "pwd") == 0) {
+            printf("📍 Mostrando el directorio de trabajo actual...\n");
+            execlp("/bin/pwd", "pwd", NULL);
+        } else if (strcmp(command, "date") == 0) {
+            printf("📅 Mostrando la fecha y hora actuales...\n");
+            execlp("/bin/date", "date", NULL);
+        } else {
+            printf("❌ Comando no reconocido: %s\n", command);
+            exit(0); // Si el comando no es reconocido
+        }
+    } else {
+        printf("👴 Soy el proceso padre! Mi PID es %d y estoy esperando a que mi hijo termine\n", getpid());
+        wait(NULL);
+        printf("🎉 Proceso hijo terminado!\n");
+    }
+}
+
+int main() {
+    char command[100];
+    while (1) {
+        printf("osh> ");
+        int ret = scanf("%99s", command);
+        if (ret == EOF || strcmp(command, "exit") == 0 || strcmp(command, "quit") == 0) {
+            printf("👋 ¡Adiós! Saliendo...\n");
+            break;
+        }
+        execute_command(command);
+    }
+    return 0;
+}
