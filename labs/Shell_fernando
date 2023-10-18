@@ -1,0 +1,51 @@
+//Luis Fernando Cuevas Arroyo A01637254
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+//Programa que simula un shell de linux con comandos basicos como ls, pwd y cat
+int main()
+{
+    char working_directory[1024];
+    getcwd(working_directory, sizeof(working_directory));
+
+    while (true)
+    {
+        char input_command[1024];
+        char *command_arguments[10];
+        int argument_count = 0;
+
+        printf("Fernando Cuevas Shell: ");
+        fgets(input_command, sizeof(input_command), stdin);
+
+        input_command[strlen(input_command) - 1] = '\0';
+        char *token = strtok(input_command, " ");
+        while (token != NULL)
+        {
+            command_arguments[argument_count] = token;
+            token = strtok(NULL, " ");
+            argument_count++;
+        }
+        command_arguments[argument_count] = NULL;
+
+        if (strcmp(command_arguments[0], "exit") == 0)
+        {
+            return 0;
+        }
+
+        pid_t process_id = fork();
+        if (process_id == 0)
+        {
+            // Child process
+            execvp(command_arguments[0], command_arguments);
+        }
+        else
+        {
+            // Parent process
+            wait(NULL);
+        }
+    }
+    return 0;
+}
