@@ -1,0 +1,75 @@
+//Santiago Lopez A01643411
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <limits.h>
+#include <unistd.h>
+
+
+void cus_ls() {
+    struct dirent *entry;
+    DIR *dp = opendir(".");
+    if (dp == NULL) {
+        perror("No se puede abrir el directorio.");
+        return;
+    }
+
+    while ((entry = readdir(dp))) {
+        printf("%s\n", entry->d_name);
+    }
+    closedir(dp);
+}
+
+
+void cus_pwd() {
+    char path[PATH_MAX];
+    if (getcwd(path, sizeof(path)) != NULL) {
+        printf("%s\n", path);
+    } else {
+        perror("getcwd() error");
+    }
+}
+
+int main() {
+    while (1) {
+        printf("Seleccione una opcion:");
+        printf("1. ls\n");
+        printf("2. cat\n");
+        printf("3. System Call (pwd)\n");
+        printf("4. Terminar\n");
+        printf("Escriba su opcion (1/2/3/4): ");
+
+        int choice;
+        if (scanf("%d", &choice) != 1) {
+            printf("Su input no es valido.\n");
+            fflush(stdin); 
+            continue;
+        }
+
+        switch (choice) {
+            case 1:
+                cus_ls();
+                break;
+            case 2:
+                printf("Escribame el nombre de su archivo, maximo 256 caracteres");
+                char filename[256];
+                scanf("%255s", filename);
+                char cat_command[512];
+                snprintf(cat_command, sizeof(cat_command), "cat %s", filename);
+                system(cat_command);
+                break;
+            case 3:
+                cus_pwd();
+                break;
+            case 4:
+                printf("Terinando el programa.\n");
+                exit(0);
+            default:
+                printf("Opcion invalida, escoga otra opcion\n");
+                break;
+        }
+    }
+
+    return 0;
+}
