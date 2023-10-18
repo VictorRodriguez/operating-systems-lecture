@@ -1,1 +1,165 @@
-//Trabajo Terminal
+//Tarea Terminal
+#include <sys/types.h>
+#include <stdlib.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <errno.h>
+#include <sys/wait.h>
+
+#define SHMSZ     10
+
+void server(char[10]);
+void client(pid_t);
+
+int main(){
+  pid_t pid;
+  char op[10], st[10];
+  printf("            BIENVENIDO A LA TERMINAL\n");
+  printf("Los comandos que puede ejecutar son los siguientes: ls, pwd, date, exit\n");
+  
+  //Terminal visual space
+  while(strcmp(st, "exit") != 0){
+    printf(">> ");
+    fgets(op,10,stdin);
+    for(int i=0; i<strlen(op)-1; i++){
+      st[i]=op[i];
+    }
+    //If the option is not "exit"
+    if(strcmp(st, "exit") != 0){
+      server(st); //Calling server function
+      client(pid); //Calling client function
+      //Resetting char variables 
+      memset(st,0,10);
+      memset(op,0,10);
+    }
+  }
+
+  return 0;
+}
+
+void server(char op[10]){
+  char c;
+  int shmid;
+  key_t key;
+  char *shm;
+
+  /*
+    * We'll name our shared memory segment
+    * "1122".
+  */
+  key = 1122;
+
+  /*
+    * Create the segment.
+  */
+  if ((shmid = shmget(key, SHMSZ, IPC_CREAT | 0666)) < 0) {
+      perror("shmget");
+      exit(1);
+  }
+
+  /*
+    * Now we attach the segment to our data space.
+  */
+  if ((shm = shmat(shmid, NULL, 0)) == (char *) -1) {
+      perror("shmat");
+      exit(1);
+  }
+
+  /*
+    * Now put some things into the memory for the
+    * other process to read.
+  */
+
+  strcpy(shm, op);
+}
+
+void client(pid_t pid){
+  int shmid;
+  key_t key;
+  char *shm;
+
+  /*
+    * We need to get the segment named
+    * "1122", created by the server.
+  */
+  key = 1122;
+
+  /*
+    * Locate the segment.
+  */
+  if ((shmid = shmget(key, SHMSZ, 0666)) < 0) {
+      perror("shmget");
+      exit(1);
+  }
+
+  /*
+    * Now we attach the segment to our data space.
+  */
+  if ((shm = shmat(shmid, NULL, 0)) == (char *) -1) {
+      perror("shmat");
+      exit(1);
+  }
+
+  /*
+    * Now read what the server put in the memory.
+  */
+  //If user wrote the command ls 
+  if(strcmp((char *)shm, "ls") == 0){
+    pid=fork(); //Creating a new child
+    if(pid<0){
+      /* error occurred */
+      fprintf(stderr, "Fork Failed");
+      exit(-1);
+    }
+    else if(pid==0){
+      /* child process */
+      execlp("/bin/ls","ls",NULL);
+    }
+    else{
+      wait(NULL);
+    }
+  }
+  
+  //If user wrote the command pwd
+  else if(strcmp((char *)shm, "pwd") == 0){
+    pid=fork(); //Creating a new child
+    if(pid<0){
+      /* error occurred */
+      fprintf(stderr, "Fork Failed");
+      exit(-1);
+    }
+    else if(pid==0){
+      /* child process */
+      execlp("/bin/pwd","pwd",NULL);
+    }
+    else{
+      wait(NULL);
+    }
+  }
+  
+  //If user wrote the command date
+  else if(strcmp((char *)shm, "date") == 0){
+    pid=fork(); //Creating a new child
+    if(pid<0){
+      /* error occurred */
+      fprintf(stderr, "Fork Failed");
+      exit(-1);
+    }
+    else if(pid==0){
+      /* child process */
+      execlp("/bin/date","date",NULL);
+    }
+    else{
+      wait(NULL);
+    }
+  }
+  
+  //If user wrote an invalid command
+  else{
+    shm=NULL;
+    printf("El comando que ingresó no es válido\n");
+  }
+}
