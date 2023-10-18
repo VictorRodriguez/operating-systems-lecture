@@ -1,3 +1,6 @@
+// Alumno: Erick Oseguera Salinas
+// Matricula: A01068271
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
