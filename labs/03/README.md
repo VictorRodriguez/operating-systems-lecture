@@ -18,7 +18,7 @@ language. At the end of the practice students will understand
 
 * Clone the repository
 * Go to operating-systems-lecture/labs/03
-* Reading the examples from operating-systems-lecture/labs/03 create a terminal
+* Reading the examples from operating-systems-lecture/labs/03/Terminal
 * git commit -s -m 'ITESMID-homework-03'
 * git send-mail -1
 
