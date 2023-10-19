@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    char command[100];  // Almacenar el comando ingresado
+
+    while (1) {
+        printf("osh> ");
+        fgets(command, sizeof(command), stdin); // Leer el comando ingresado
+
+        // Eliminar el salto de línea final
+        char *pos;
+        if ((pos = strchr(command, '\n')) != NULL) {
+            *pos = '\0';
+        }
+
+        if (strcmp(command, "ls") == 0) {
+            // Crear un proceso hijo para ejecutar "ls"
+            pid_t pid = fork();
+
+            if (pid < 0) {
+                perror("Error en fork");
+            } else if (pid == 0) {
+                // Este es el proceso hijo
+                execlp("ls", "ls", (char *)NULL);  // Ejecutar "ls"
+                perror("Error en exec");
+                exit(1);
+            } else {
+                // Este es el proceso padre, espera a que el hijo termine
+                wait(NULL);
+            }
+        } else if (strcmp(command, "pwd") == 0) {
+            // Crear un proceso hijo para ejecutar "pwd"
+            pid_t pid = fork();
+
+            if (pid < 0) {
+                perror("Error en fork");
+            } else if (pid == 0) {
+                // Este es el proceso hijo
+                execlp("pwd", "pwd", (char *)NULL);  // Ejecutar "pwd"
+                perror("Error en exec");
+                exit(1);
+            } else {
+                // Este es el proceso padre, espera a que el hijo termine
+                wait(NULL);
+            }
+        } else if (strcmp(command, "date") == 0) {
+            // Crear un proceso hijo para ejecutar "date"
+            pid_t pid = fork();
+
+            if (pid < 0) {
+                perror("Error en fork");
+            } else if (pid == 0) {
+                // Este es el proceso hijo
+                execlp("date", "date", (char *)NULL);  // Ejecutar "date"
+                perror("Error en exec");
+                exit(1);
+            } else {
+                // Este es el proceso padre, espera a que el hijo termine
+                wait(NULL);
+            }
+        } else if (strcmp(command, "exit") == 0) {
+            // Salir del bucle y terminar el programa
+            break;
+        } else {
+            printf("Comando no reconocido: %s\n", command);
+        }
+    }
+
+    return 0;
+}
+
+
+
+
