@@ -1,0 +1,61 @@
+// A01643639 Sadrac Aramburo
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    char ls[] = "ls";
+    char date[] = "date";
+    char pwd[] = "pwd";
+
+    pid_t pid;
+
+    printf("Select Option\n");
+
+    while (1) {
+        printf("ls, pwd, date, exit\n");  // Prompt for user input
+        char opt[6];
+        scanf("%s", opt);
+
+        if (strcmp(opt, ls) == 0) {  // If the user entered "ls"
+            pid = fork();
+            if (pid < 0) {
+                fprintf(stderr, "Fork failed");
+            } else if (pid == 0) {
+                execlp("/bin/ls", "ls", NULL);  // Execute the 'ls' command
+            } else {
+                wait(NULL);  // Wait for the child process to finish
+            }
+        } else if (strcmp(opt, date) == 0) {  // If the user entered "date"
+            pid = fork();
+            if (pid < 0) {
+                fprintf(stderr, "Fork failed");
+            } else if (pid == 0) {
+                execlp("/bin/date", "date", NULL);  // Execute the 'date' command
+            } else {
+                wait(NULL);  // Wait for the child process to finish
+            }
+        } else if (strcmp(opt, pwd) == 0) {  // If the user entered "pwd"
+            pid = fork();
+            if (pid < 0) {
+                fprintf(stderr, "Fork failed");
+            } else if (pid == 0) {
+                execlp("/bin/pwd", "pwd", NULL);  // Execute the 'pwd' command
+            } else {
+                wait(NULL);  // Wait for the child process to finish
+            }
+        } else if (strcmp(opt, "exit") == 0) {  // If the user entered "exit"
+            break;  // Exit the loop and terminate the program
+        } else {
+            printf("Error: Invalid option\n");  // Handle invalid user input
+            pid = fork();
+            if (pid < 0) {
+                fprintf(stderr, "Fork failed");
+            }
+        }
+    }
+    return 0;
+}
