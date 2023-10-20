@@ -3,6 +3,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 int main(){
     char user_input[20];
@@ -18,7 +19,7 @@ int main(){
 
     if(p_fork < 0){  // Something went wrong
         fprintf(stderr, "An error has occured!");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     else if(p_fork == 0){  // Child section
         //printf("Child created succesfully \n");
@@ -26,6 +27,6 @@ int main(){
         execlp(directorio, user_input, NULL);
     }else{
         wait(NULL);
-        exit(0);
+        exit(EXIT_SUCCESS);
     }
 }
