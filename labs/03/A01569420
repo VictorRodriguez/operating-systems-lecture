@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+
+void execute_argument(char* argument) {
+    pid_t pid;
+    pid = fork();
+
+    if (pid < 0) {
+        fprintf(stderr, "Fork failed\n");
+        return;
+    } else if (pid == 0) {
+        
+        execlp("ls", "-l", NULL);
+        fprintf(stderr, "Exec failed\n");
+        return;
+    } else {
+    
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+
+int main() {
+    char argument[100];
+
+    while (1) {
+        printf("osh> ls");
+        fgets(argument, sizeof(argument), stdin);
+
+       
+        argument[strlen(argument) - 1] = '\0';
+
+        if (strcmp(argument, "exit") == 0) {
+            break;  
+        }
+
+        execute_argument(argument);
+    }
+
+    return 0;
+}
