@@ -1,0 +1,74 @@
+// Rodrigo Castellanos Rodriguez A01643147
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main() {
+    char user_input[20];
+    pid_t pid;
+
+    // Imprimir un mensaje de bienvenida en la consola
+    printf("Consola de Rodrigo, elija una opción:\n");
+
+    while (1) {
+        // Mostrar las opciones disponibles para el usuario
+        printf("Opciones: ls, date, pwd, exit\n> ");
+        scanf("%s", user_input);
+
+        if (strcmp(user_input, "ls") == 0) {
+            // Crear un proceso hijo para ejecutar el comando "ls"
+            pid = fork();
+            if (pid < 0) {
+                perror("Fork failed"); // Mostrar un mensaje de error si falla la creación del proceso hijo
+                exit(1);
+            } else if (pid == 0) {
+                // En el proceso hijo, reemplazar la imagen del proceso actual con el comando "ls"
+                execlp("/bin/ls", "ls", NULL);
+                perror("Exec failed"); // Mostrar un mensaje de error si falla la ejecución de "ls"
+                exit(1);
+            } else {
+                // En el proceso padre, esperar a que el proceso hijo termine
+                wait(NULL);
+            }
+        } else if (strcmp(user_input, "date") == 0) {
+            // Crear un proceso hijo para ejecutar el comando "date"
+            pid = fork();
+            if (pid < 0) {
+                perror("Fork failed");
+                exit(1);
+            } else if (pid == 0) {
+                // En el proceso hijo, reemplazar la imagen del proceso actual con el comando "date"
+                execlp("/bin/date", "date", NULL);
+                perror("Exec failed");
+                exit(1);
+            } else {
+                wait(NULL);
+            }
+        } else if (strcmp(user_input, "pwd") == 0) {
+            // Crear un proceso hijo para ejecutar el comando "pwd"
+            pid = fork();
+            if (pid < 0) {
+                perror("Fork failed");
+                exit(1);
+            } else if (pid == 0) {
+                // En el proceso hijo, reemplazar la imagen del proceso actual con el comando "pwd"
+                execlp("/bin/pwd", "pwd", NULL);
+                perror("Exec failed");
+                exit(1);
+            } else {
+                wait(NULL);
+            }
+        } else if (strcmp(user_input, "exit") == 0) {
+            // Si el usuario ingresa "exit", salir del bucle y finalizar el programa
+            break;
+        } else {
+            // Si el usuario ingresa una opción no válida, mostrar un mensaje de error
+            printf("Error: elija una opción válida.\n");
+        }
+    }
+
+    return 0;
+}
