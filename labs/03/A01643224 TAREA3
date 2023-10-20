@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main(void) {
+    char entradadelusuario[15];
+        printf("Bienvenido ");
+         printf("Ingrese lo que desea realizar");
+        fgets(entradadelusuario, sizeof(entradadelusuario), stdin);
+        pid_t pid = fork();
+
+        if (pid==-1) {
+
+                 perror("Error");
+                return EXIT_FAILURE;
+
+       } else if (pid == 0) {
+
+                 execl("/bin/sh", "sh", "-c", entradadelusuario, (char *)NULL);
+                return EXIT_FAILURE;
+
+       } else {
+            
+                wait(NULL);
+       }
+
+    return 0; 
+}
