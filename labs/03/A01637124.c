@@ -1,3 +1,4 @@
+/*A01637124 Ana Karen Zetter Márquez*/
 #include <sys/types.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -12,7 +13,7 @@ int main() {
     printf("¡Hola! :D Te doy la bienvenida.\n");
     printf("¿Que te gustaria hacer?\n");
     printf("Menu: \n");
-    printf("\t1. Salir\n");
+    printf("\t1. salir\n");
     printf("\t2. date\n");
     printf("\t3. pwd\n");
     printf("\t4. ls\n");
@@ -25,19 +26,21 @@ int main() {
 
       case 2:
 
+	    pid = fork();                                          //Fork
+
 	    if (pid < 0) {                                         //Detener en caso de error
 		    fprintf(stderr, "Error: No se pudo realizar la operacion Fork.");
 		    exit (-1) ;
 	    }
 
-	    else if (pid == 0) {                                   //Hijo realiza operación date
-		    execlp("/bin/date","date",NULL);
-	    }
+    	if(pid == 0){                                   	   //Hijo realiza operación date
+            execlp("/bin/date","date",NULL);
 
-	    else {                                                 //Padre espera a que termine el hijo
-		    wait(NULL);
-	    }
+        }else{                                                 //Padre espera a que termine el hijo
+            wait(NULL);
+        }
         break;
+
 
       case 3:
 	    pid = fork();                                          //Fork
